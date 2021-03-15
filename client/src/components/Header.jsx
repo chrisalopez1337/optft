@@ -13,19 +13,11 @@ const Container = styled.div`
     flex-direction: row;
     border-bottom: 2px solid #e64545;
     background-color: #1c1c1c;
-`;
-
-const RightContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
     width: 100%;
-    margin-right: 10px;
-`;
-
-const CenterContainer = styled.div`
-    display: flex;
-    width: 100%;
-    justify-content: center;
+    justify-content: space-between;
+    @media (max-width: 500px) {
+        flex-direction: column;
+    }
 `;
 
 const Logo = styled.h2`
@@ -37,14 +29,8 @@ export default function Header() {
     return (
         <Container>
             <Logo>optft.gg</Logo>
-
-            <CenterContainer>
-                <HeaderSearchBar />
-            </CenterContainer>
-            
-            <RightContainer>
-                <HeaderButtons />
-            </RightContainer>
+            <HeaderSearchBar />
+            <HeaderButtons />
         </Container>
     );
 }

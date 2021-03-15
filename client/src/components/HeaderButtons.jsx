@@ -8,6 +8,10 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     flex-direction: row;
+    @media (max-width: 500px) {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 `;
 
 const Button = styled.button`

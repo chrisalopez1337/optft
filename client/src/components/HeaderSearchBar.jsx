@@ -6,6 +6,10 @@ import styled from 'styled-components';
 const Container = styled.div`
     display: flex;
     margin-left: 10px;
+    @media (max-width: 500px) {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 `;
 
 const Input = styled.input`
@@ -20,6 +24,10 @@ const Input = styled.input`
     font-family: inherit;
     font-size: 14px;
     background-color: transparent;
+    width: 300px;
+    @media (max-width: 650px) {
+        width: 100%;
+    }
 `;
 
 const Select = styled.select`
