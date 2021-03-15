@@ -2,13 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-// Children components
-import Header from './Header.jsx';
 
-export default function App() {
+export default function Header() {
     return (
         <>
-            <Header />
+            <h1>optft.gg</h1>
         </>
     );
-};
+}
