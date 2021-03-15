@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 // Children Components
 import HeaderButtons from './HeaderButtons.jsx';
+import HeaderSearchBar from './HeaderSearchBar.jsx';
 
 // Styling
 const Container = styled.div`
@@ -21,6 +22,12 @@ const RightContainer = styled.div`
     margin-right: 10px;
 `;
 
+const CenterContainer = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: center;
+`;
+
 const Logo = styled.h2`
     margin-left: 7px;
     color: #e64545;
@@ -30,6 +37,11 @@ export default function Header() {
     return (
         <Container>
             <Logo>optft.gg</Logo>
+
+            <CenterContainer>
+                <HeaderSearchBar />
+            </CenterContainer>
+            
             <RightContainer>
                 <HeaderButtons />
             </RightContainer>
