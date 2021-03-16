@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 // Children components
 import LandingPageSignUp from './LandingPageSignUp.jsx';
+import LandingPageInfo from './LandingPageInfo.jsx';
 
 // styling
 const Container = styled.div`
@@ -17,6 +18,7 @@ export default function LandingPage() {
     return (
         <Container>
             <LandingPageSignUp />
+            <LandingPageInfo />
         </Container>
     );
 }
