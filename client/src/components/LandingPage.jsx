@@ -12,13 +12,13 @@ const Container = styled.div`
     justify-content: center;
     flex-direction: row;
     width: 100%;
+    background-size: cover;
+    height: 92.5vh;
 `;
 
 export default function LandingPage() {
     return (
-        <Container>
-            <LandingPageInfo />
-            <LandingPageSignUp />
+        <Container className="container">
         </Container>
     );
 }

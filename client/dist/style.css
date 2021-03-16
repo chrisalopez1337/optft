@@ -5,3 +5,7 @@ body, html {
   background-color: #28272b;
   color: whitesmoke;
 }
+
+.container {
+    background-image: url("./assets/background.jpg");
+}

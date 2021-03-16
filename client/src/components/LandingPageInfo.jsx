@@ -15,6 +15,12 @@ const Container = styled.div`
     background-color: #1c1c1c;
     min-width: 400px;
     max-width: 400px;
+    min-height: 395px;
+`;
+
+const Info = styled.p`
+    padding-left: 10px;
+    padding-right: 10px;
 `;
 
 const Row = styled.div`
@@ -27,7 +33,16 @@ export default function LandingPageInfo() {
     return (
         <Container>
             <h3>What is optft.gg?</h3>
-            <p> Optft.gg is a single page web application to analyze your last 20 TFT games and show your individual performance, and that versus your peersand then gives tips to improve your play!</p>
+            <Info> Optft.gg is a single page web application to analyze your last 20 TFT games and show your individual performance, and that versus your peers. We then gives tips to improve your play!</Info>
+
+            <h3>Some of the data we provide</h3>
+            <ul>
+                <li>Gold efficiency</li>
+                <li>Team Winrates</li>
+                <li>Individual Unit Winrates</li>
+                <li>If you are playing to aggressive, or not aggresive enough</li>
+                <li>And more...</li>
+            </ul>
         </Container>
     );
 }
