@@ -17,8 +17,8 @@ const Container = styled.div`
 export default function LandingPage() {
     return (
         <Container>
-            <LandingPageSignUp />
             <LandingPageInfo />
+            <LandingPageSignUp />
         </Container>
     );
 }
