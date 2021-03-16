@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 // Children components
 import Header from './Header.jsx';
+import LandingPage from './LandingPage.jsx';
 
 // Styling
 const Container = styled.div`
@@ -15,6 +16,7 @@ export default function App() {
     return (
         <Container>
             <Header />
+            <LandingPage />
         </Container>
     );
 };
