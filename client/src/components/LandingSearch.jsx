@@ -8,7 +8,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
-    @media (max-width: 500px) {
+    @media (max-width: 542px) {
         display: none;
     }
 `;

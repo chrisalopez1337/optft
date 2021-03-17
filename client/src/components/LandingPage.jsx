@@ -15,9 +15,10 @@ const Container = styled.div`
     flex-direction: column;
     width: 100%;
     background-image: url(${image});
-    height: 92.5vh;
+    background-size: cover;
+    height: 100vh;
     x-overflow: hidden;
-    @media (max-width: 500px) {
+    @media (max-width: 542px) {
         background-image: none;
         background-color: #2e2c2c;
         justify-content: flex-start;
@@ -29,14 +30,14 @@ const Logo = styled.h1`
     @media (max-width: 625px) {
         font-size: 36px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 542px) {
         display: none;        
     }
 `;
 
 const SpacingDiv = styled.div`
     min-height: 200px;
-    @media (max-width: 500px) {
+    @media (max-width: 542px) {
         display: none;        
     }
 `;
