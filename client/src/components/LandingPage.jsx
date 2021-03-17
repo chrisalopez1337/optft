@@ -20,6 +20,7 @@ const Container = styled.div`
     @media (max-width: 500px) {
         background-image: none;
         background-color: #2e2c2c;
+        justify-content: flex-start;
     }
 `;
 
@@ -51,9 +52,6 @@ const Ads = styled.div`
     @media (max-width: 775px) {
         width: 320px;
         height: 100px;
-    }
-    @media (max-width: 500px) {
-        display: none;        
     }
 `;
 
