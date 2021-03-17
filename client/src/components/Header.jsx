@@ -15,7 +15,7 @@ const Container = styled.div`
     background-color: #1c1c1c;
     width: 100%;
     justify-content: space-between;
-    @media (max-width: 500px) {
+    @media (max-width: 542px) {
         flex-direction: column;
     }
 `;

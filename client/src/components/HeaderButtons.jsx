@@ -8,7 +8,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     flex-direction: row;
-    @media (max-width: 500px) {
+    @media (max-width: 542px) {
         margin-top: 10px;
         margin-bottom: 10px;
     }

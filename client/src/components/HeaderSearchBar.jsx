@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Container = styled.div`
     display: flex;
     margin-left: 10px;
-    @media (max-width: 500px) {
+    @media (max-width: 542px) {
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -25,7 +25,7 @@ const Input = styled.input`
     font-size: 14px;
     background-color: transparent;
     width: 300px;
-    @media (max-width: 650px) {
+    @media (max-width: 670px) {
         width: 100%;
     }
 `;

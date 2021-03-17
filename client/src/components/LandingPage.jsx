@@ -17,17 +17,52 @@ const Container = styled.div`
     background-image: url(${image});
     height: 92.5vh;
     x-overflow: hidden;
+    @media (max-width: 500px) {
+        background-image: none;
+        background-color: #2e2c2c;
+    }
+`;
+
+const Logo = styled.h1`
+    font-size: 48px;
+    @media (max-width: 625px) {
+        font-size: 36px;
+    }
+    @media (max-width: 500px) {
+        display: none;        
+    }
 `;
 
 const SpacingDiv = styled.div`
     min-height: 200px;
+    @media (max-width: 500px) {
+        display: none;        
+    }
+`;
+
+const Ads = styled.div`
+    background-color: #1c1c1c;
+    border: 2px solid #e64545;
+    border-radius: 7px;
+    width: 728px;
+    height: 90px;
+    padding: 7px;
+    margin-top: 50px;
+    @media (max-width: 775px) {
+        width: 320px;
+        height: 100px;
+    }
+    @media (max-width: 500px) {
+        display: none;        
+    }
 `;
 
 export default function LandingPage() {
     return (
         <Container>
-            <h1>optft.gg</h1>
+            <Logo>optft.gg</Logo>
             <LandingSearch />
+            <Ads>Advertisement</Ads>
             <SpacingDiv></SpacingDiv>
         </Container>
     );

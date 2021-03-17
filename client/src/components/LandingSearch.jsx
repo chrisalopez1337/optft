@@ -8,6 +8,9 @@ const Container = styled.div`
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
+    @media (max-width: 500px) {
+        display: none;
+    }
 `;
 
 const SearchBar = styled.input`
@@ -23,6 +26,11 @@ const SearchBar = styled.input`
     border-bottom-left-radius: 15px;
     font-size: 20px;
     min-width: 400px;
+    @media (max-width: 625px) {
+        font-size: 16px;
+        min-width: 250px;
+        padding: 7px 0px 7px 10px;
+    }
 `;
 
 const Select = styled.select`
@@ -34,6 +42,10 @@ const Select = styled.select`
     font-family: inherit;
     font-size: 19px;
     background-color: #1c1c1c;
+    @media (max-width: 625px) {
+        font-size: 15.5px;
+        padding: 7px 10px 7px 0px;
+    }
 `;
 
 const SearchButton = styled.div`
@@ -47,6 +59,10 @@ const SearchButton = styled.div`
     color: whitesmoke;
     font-family: inherit;
     font-size: 20px;
+    @media (max-width: 625px) {
+        font-size: 16px;
+        padding: 7px 10px 7px 10px;
+    }
 `;
 
 export default function LandingSearch() {
