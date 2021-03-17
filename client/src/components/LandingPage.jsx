@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import LandingPageSignUp from './LandingPageSignUp.jsx';
 import LandingPageInfo from './LandingPageInfo.jsx';
 
+import image from '../../dist/assets/background.jpg';
+
 // styling
 const Container = styled.div`
     display: flex;
@@ -12,13 +14,14 @@ const Container = styled.div`
     justify-content: center;
     flex-direction: row;
     width: 100%;
-    background-size: cover;
+    background-image: url(${image});
     height: 92.5vh;
+    x-overflow: hidden;
 `;
 
 export default function LandingPage() {
     return (
-        <Container className="container">
+        <Container>
         </Container>
     );
 }
