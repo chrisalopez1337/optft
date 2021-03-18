@@ -5,6 +5,7 @@ import styled from 'styled-components';
 // Children components
 import Header from './Header.jsx';
 import LandingPage from './LandingPage.jsx';
+import InfoPage from './InfoPage.jsx';
 
 // Styling
 const Container = styled.div`
@@ -16,7 +17,8 @@ export default function App() {
     return (
         <Container>
             <Header />
-            <LandingPage />
+        { /*  <LandingPage /> */ }
+            <InfoPage />
         </Container>
     );
 };
