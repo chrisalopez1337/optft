@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-
+// Images
 import ossia from '../../dist/assets/test.png';
+import slayer from '../../dist/assets/slayer.png';
+import filledStar from '../../dist/assets/filledstar.png'; 
+import blankStar from '../../dist/assets/blankstar.png'; 
 
 // Styling
 const Container = styled.div`
@@ -15,6 +18,7 @@ const Container = styled.div`
     padding: 10px;
     border-radius: 7px;
     min-width: 800px;
+    max-width: 800px;
     margin-top: 30px;
     transition-duration: 0.2s;
     &:hover {
@@ -39,17 +43,76 @@ const RankTypeAndInfo = styled.div`
     margin-left: 10px;
 `;
 
+
 const WonPlacementText = styled.p`
     color: #10c20a;
 `;
 
 const Ossia = styled.img`
-    width: 30%;
+    width: 15%;
+    max-width: 15%;
 `;
 Ossia.defaultProps = {
     src: ossia,
 }
 
+const TraitHolder = styled.div`
+    display: flex;
+    align-items: flex-start:
+    justify-content: flex-start;
+    margin-left: 15px;
+    flex-direction: row;
+`;
+
+const TraitImage = styled.img`
+    max-width:10%;
+    margin-left: 2px;
+    margin-right: 2px;
+`;
+TraitImage.defaultProps = {
+    src: slayer,
+}
+
+const TeamInfoContainer = styled.div`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
+`;
+
+const TeamMemberHolder = styled.div`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+`;
+
+const MemberStarsHolder = styled.div`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+`;
+
+const FilledStar = styled.img`
+    width: 5%;
+`;
+FilledStar.defaultProps = {
+    src: filledStar,
+}
+
+const BlankStar = styled.img`
+    width: 5%;
+`;
+BlankStar.defaultProps = {
+    src: blankStar,
+}
+
+const ChampionImage = styled.img`
+    width: 10%;
+`;
+ChamnpionImage.defaultProps = {
+    src: yuumi,
+}
 
 export default function InfoPageGameContainer() {
     return (
@@ -62,6 +125,24 @@ export default function InfoPageGameContainer() {
                     <p>Ranked TFT</p>
                     <WonPlacementText>1st place</WonPlacementText>
                 </RankTypeAndInfo>
+
+                <TraitHolder>
+                    <TraitImage />
+                    <TraitImage />
+                    <TraitImage />
+                    <TraitImage />
+                    <TraitImage />
+                </TraitHolder>
+
+                <TeamInfoContainer>
+                    <TeamMemberHolder>                    
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+                    </TeamMemberHolder>                    
+                </TeamInfoContainer>
             </Row>
         </Container>
     );
