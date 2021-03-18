@@ -13,6 +13,7 @@ const Container = styled.div`
     border: 2px solid #e64545;
     border-radius: 7px;
     min-width: 800px;
+    background-color: #140f0f;
 `;
 
 export default function InfoPageGeneralStats() {
