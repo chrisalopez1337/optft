@@ -17,6 +17,10 @@ const Summoner = styled.h1`
     @media (max-width: 860px) {
         font-size: 22px;
     }
+
+    @media (max-width: 665px) {
+        font-size: 18px;
+    }
 `;
 
 export default function InfoPage() {

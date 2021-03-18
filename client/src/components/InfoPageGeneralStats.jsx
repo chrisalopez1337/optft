@@ -18,6 +18,14 @@ const Container = styled.div`
     @media (max-width: 860px) {
         min-width: 600px;
     }
+
+    @media (max-width: 665px) {
+        min-width: 400px;
+    }
+
+    @media (max-width: 542px) {
+        width: 300px;
+    }
 `;
 
 export default function InfoPageGeneralStats() {

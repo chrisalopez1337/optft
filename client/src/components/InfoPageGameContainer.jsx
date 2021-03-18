@@ -28,6 +28,14 @@ const Container = styled.div`
     @media (max-width: 860px) {
         width: 600px;
     }
+
+    @media (max-width: 665px) {
+        width: 500px; 
+    }
+
+    @media (max-width: 542px) {
+        width: 375px;
+    }
 `;
 
 
@@ -40,6 +48,9 @@ const RankTypeAndInfo = styled.div`
     margin-left: 10px;
     @media (max-width: 860px) {
         font-size: 12px;
+    }
+    @media (max-width: 542px) {
+        font-size: 14px;
     }
 `;
 
@@ -55,6 +66,9 @@ const Ossia = styled.img`
     border-radius: 7px;
     @media (max-width: 860px) {
         width: 10%;
+    }
+    @media (max-width: 542px) {
+        width: 25%;
     }
 `;
 Ossia.defaultProps = {
@@ -155,6 +169,14 @@ const TeamMembersContainer = styled.div`
     max-width: 400px;
     @media (max-width: 860px) {
         max-width: 325px;
+    }
+
+    @media (max-width: 665px) {
+        max-width: 275px;
+    }
+
+    @media (max-width: 542px) {
+        display: none;
     }
 `;
 
