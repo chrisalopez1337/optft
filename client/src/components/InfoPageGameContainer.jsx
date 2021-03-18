@@ -6,19 +6,18 @@ import ossia from '../../dist/assets/test.png';
 import slayer from '../../dist/assets/slayer.png';
 import filledStar from '../../dist/assets/filledstar.png'; 
 import blankStar from '../../dist/assets/blankstar.png'; 
+import yuumi from '../../dist/assets/yuumi.png';
+import item from '../../dist/assets/item.png';
 
 // Styling
 const Container = styled.div`
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
     flex-direction: column;
     border: 2px solid #e64545;
     background-color: #140f0f;
     padding: 10px;
     border-radius: 7px;
-    min-width: 800px;
-    max-width: 800px;
+    width: 800px;
     margin-top: 30px;
     transition-duration: 0.2s;
     &:hover {
@@ -27,12 +26,6 @@ const Container = styled.div`
     }
 `;
 
-const Row = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; 
-    flex-direction: row;
-`;
 
 const RankTypeAndInfo = styled.div`
     display: flex;
@@ -51,6 +44,8 @@ const WonPlacementText = styled.p`
 const Ossia = styled.img`
     width: 15%;
     max-width: 15%;
+    border: 1px solid whitesmoke;
+    border-radius: 7px;
 `;
 Ossia.defaultProps = {
     src: ossia,
@@ -60,12 +55,12 @@ const TraitHolder = styled.div`
     display: flex;
     align-items: flex-start:
     justify-content: flex-start;
-    margin-left: 15px;
     flex-direction: row;
+    margin-left: 15px;
 `;
 
 const TraitImage = styled.img`
-    max-width:10%;
+    max-width: 15%;
     margin-left: 2px;
     margin-right: 2px;
 `;
@@ -73,46 +68,82 @@ TraitImage.defaultProps = {
     src: slayer,
 }
 
-const TeamInfoContainer = styled.div`
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: row;
-`;
 
 const TeamMemberHolder = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
+    margin-right: 4px;
+    margin-left: 4px;
 `;
 
 const MemberStarsHolder = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    padding-bottom: 2px;
 `;
 
 const FilledStar = styled.img`
-    width: 5%;
+    width: 30%;
 `;
 FilledStar.defaultProps = {
     src: filledStar,
 }
 
 const BlankStar = styled.img`
-    width: 5%;
+    width: 30%;
 `;
 BlankStar.defaultProps = {
     src: blankStar,
 }
 
 const ChampionImage = styled.img`
-    width: 10%;
+    width: 100%;
+    border: 0.5px solid whitesmoke;
+    border-radius: 7px;
 `;
-ChamnpionImage.defaultProps = {
+ChampionImage.defaultProps = {
     src: yuumi,
 }
+
+const ChampionItemHolder = styled.div`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 2px;
+`;
+
+const Item = styled.img`
+    width: 30%;
+    margin: 1px;
+`;
+Item.defaultProps = {
+    src: item,
+}
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 0;
+`;
+
+const Column = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+`;
+
+const TeamMembersContainer = styled.div`
+    display: flex;
+    align-items; center;
+    justify-content: flex-start;
+    flex-direction: row;
+    max-width: 400px;
+`;
 
 export default function InfoPageGameContainer() {
     return (
@@ -134,16 +165,202 @@ export default function InfoPageGameContainer() {
                     <TraitImage />
                 </TraitHolder>
 
-                <TeamInfoContainer>
+                    <TeamMembersContainer>
+                    <TeamMemberHolder>
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+                        
+                        <Column>
+                            <ChampionImage />
+                        </Column>
+
+                        <ChampionItemHolder>
+                            <Item />
+                            <Item />
+                            <Item />
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>
+
+                    <TeamMemberHolder>
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+
+                        <Column>
+                            <ChampionImage />
+                        </Column>
+
+                        <ChampionItemHolder>
+                            <Item />
+                            <Item />
+                            <Item />
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>
+
+                    <TeamMemberHolder>
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+                        
+                        <Column>
+                            <ChampionImage />
+                        </Column>
+
+                        <ChampionItemHolder>
+                            <Item />
+                            <Item />
+                            <Item />
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>
+
+                    <TeamMemberHolder>
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+
+                        <Column>
+                            <ChampionImage />
+                        </Column>
+
+                        <ChampionItemHolder>
+                            <Item />
+                            <Item />
+                            <Item />
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>
+                    <TeamMemberHolder>
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+                        
+                        <Column>
+                            <ChampionImage />
+                        </Column>
+
+                        <ChampionItemHolder>
+                            <Item />
+                            <Item />
+                            <Item />
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>
+
+                    <TeamMemberHolder>
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+
+                        <Column>
+                            <ChampionImage />
+                        </Column>
+
+                        <ChampionItemHolder>
+                            <Item />
+                            <Item />
+                            <Item />
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>
+                    <TeamMemberHolder>
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+                        
+                        <Column>
+                            <ChampionImage />
+                        </Column>
+
+                        <ChampionItemHolder>
+                            <Item />
+                            <Item />
+                            <Item />
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>
+
+                    <TeamMemberHolder>
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+
+                        <Column>
+                            <ChampionImage />
+                        </Column>
+
+                        <ChampionItemHolder>
+                            <Item />
+                            <Item />
+                            <Item />
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>
+                    </TeamMembersContainer>
+                
+            </Row>
+        </Container>
+    );
+}
+               /*  <Row>
                     <TeamMemberHolder>                    
                         <MemberStarsHolder>
                             <FilledStar />
                             <FilledStar />
                             <BlankStar />
                         </MemberStarsHolder>
+
+                        <ChampionImage />
+
+                        <ChampionItemHolder>
+                            <Item />               
+                            <Item />               
+                            <Item />               
+                        </ChampionItemHolder>
                     </TeamMemberHolder>                    
-                </TeamInfoContainer>
-            </Row>
-        </Container>
-    );
-}
+
+                    <TeamMemberHolder>                    
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+
+                        <ChampionImage />
+
+                        <ChampionItemHolder>
+                            <Item />               
+                            <Item />               
+                            <Item />               
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>                    
+
+                    <TeamMemberHolder>                    
+                        <MemberStarsHolder>
+                            <FilledStar />
+                            <FilledStar />
+                            <BlankStar />
+                        </MemberStarsHolder>
+
+                        <ChampionImage />
+
+                        <ChampionItemHolder>
+                            <Item />               
+                            <Item />               
+                            <Item />               
+                        </ChampionItemHolder>
+                    </TeamMemberHolder>                    
+
+
+                </Row> */
