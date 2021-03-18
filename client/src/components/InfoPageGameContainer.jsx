@@ -24,6 +24,10 @@ const Container = styled.div`
         border: 2px solid whitesmoke;
         background-color: #402323;
     }
+
+    @media (max-width: 860px) {
+        width: 600px;
+    }
 `;
 
 
@@ -34,6 +38,9 @@ const RankTypeAndInfo = styled.div`
     font-size: 16px;
     flex-direction: column;
     margin-left: 10px;
+    @media (max-width: 860px) {
+        font-size: 12px;
+    }
 `;
 
 
@@ -46,6 +53,9 @@ const Ossia = styled.img`
     max-width: 15%;
     border: 1px solid whitesmoke;
     border-radius: 7px;
+    @media (max-width: 860px) {
+        width: 10%;
+    }
 `;
 Ossia.defaultProps = {
     src: ossia,
@@ -143,6 +153,9 @@ const TeamMembersContainer = styled.div`
     justify-content: flex-start;
     flex-direction: row;
     max-width: 400px;
+    @media (max-width: 860px) {
+        max-width: 325px;
+    }
 `;
 
 export default function InfoPageGameContainer() {

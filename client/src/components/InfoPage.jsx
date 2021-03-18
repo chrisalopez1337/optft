@@ -13,11 +13,17 @@ const Container = styled.div`
     flex-direction: column;
 `;
 
+const Summoner = styled.h1`
+    @media (max-width: 860px) {
+        font-size: 22px;
+    }
+`;
+
 export default function InfoPage() {
     let testArray = [ 1, 2 ];
     return (
         <Container>
-            <h1>Summoner Name</h1>
+            <Summoner>Summoner Name</Summoner>
             <InfoPageGeneralStats />
             { testArray.map(number => <InfoPageGameContainer />)}        
         </Container>

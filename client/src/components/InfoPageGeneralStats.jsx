@@ -15,6 +15,9 @@ const Container = styled.div`
     border-radius: 7px;
     min-width: 800px;
     background-color: #140f0f;
+    @media (max-width: 860px) {
+        min-width: 600px;
+    }
 `;
 
 export default function InfoPageGeneralStats() {
