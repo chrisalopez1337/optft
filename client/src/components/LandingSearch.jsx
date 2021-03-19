@@ -59,21 +59,44 @@ const SearchButton = styled.div`
     color: whitesmoke;
     font-family: inherit;
     font-size: 20px;
+    cursor: pointer;
     @media (max-width: 625px) {
         font-size: 16px;
         padding: 7px 10px 7px 10px;
     }
 `;
 
-export default function LandingSearch() {
+const Form = styled.form`
+    display: inherit;
+`;
+
+export default function LandingSearch({ search }) {
+    // Hold field data
+    const [fields, setFields] = useState({ summonerName: '', region: 'NA'});
+    const { summonerName, region } = fields;
+    // Field handler
+    function handleField(e) {
+        const { target } = e;
+        const { name, value } = target;
+        setFields({ ...fields, [name]: value });
+    }
+
+    // Submit handler
+    function handleSubmit(e) {
+        e.preventDefault();
+        search(summonerName);
+    }
+
     return (
         <Container>
-            <SearchBar placeholder="Search for a summoner..."/>
-            <Select>
-                <option>NA</option>
-                <option>EU</option>
-            </Select>
-            <SearchButton>Search</SearchButton>
+            <Form onSubmit={handleSubmit}>
+                <SearchBar placeholder="Search for a summoner..." name="summonerName" onChange={handleField} value={summonerName}/>
+                <Select name="region" value={region} onChange={handleField}>
+                    <option value="NA">NA</option>
+                    <option>EU</option>
+                </Select>
+                <SearchButton type="submit">Search</SearchButton>
+            </Form>
         </Container>
     );
 }

@@ -56,11 +56,11 @@ const Ads = styled.div`
     }
 `;
 
-export default function LandingPage() {
+export default function LandingPage({ search }) {
     return (
         <Container>
             <Logo>optft.gg</Logo>
-            <LandingSearch />
+            <LandingSearch search={search}/>
             <Ads>Advertisement</Ads>
             <SpacingDiv></SpacingDiv>
         </Container>
