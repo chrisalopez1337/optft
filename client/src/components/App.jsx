@@ -26,11 +26,15 @@ export default function App() {
             .catch(console.log);
     }
 
+    // Conditional rendering for landing page vs Info Page 
+    const pageRender = searchedData
+        ? (<InfoPage data={searchedData} />)
+        : (<LandingPage search={searchAllInfo} />)
+
     return (
         <Container>
-            <Header />
-        { /*  <LandingPage /> */ }
-            <InfoPage />
+            <Header search={searchAllInfo} />
+            {pageRender}
         </Container>
     );
 };
