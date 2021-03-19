@@ -14,6 +14,18 @@ const Container = styled.div`
 `;
 
 export default function App() {
+    // Store searched data
+    const [searchedData, setSearchedData] = useState(null);
+    // Function to query that data, and then set it.
+    function searchAllInfo(summonerName) {
+        axios.get(`/api/data/summoner/by-name/${summonerName}/all`)
+            .then(({ data }) => {
+                // This is where we would process and format the data
+                setSearchedData(data);
+            })
+            .catch(console.log);
+    }
+
     return (
         <Container>
             <Header />

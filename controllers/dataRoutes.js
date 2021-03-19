@@ -8,12 +8,15 @@ module.exports = {
     getAllDataBySummonerName: async (req, res) => {
         try {
             const { summonerName } = req.params;
+            // Data for client
             const payload = { summonerName };
-            const region = 'NA';
+            const region = 'NA'; // This will be dynamic later. 
             const config = { region, payload, apiKey, useRedis, redisConfig };
+            // Create client with information
             const client = new TftQuery(config);
-            const data = await client.getAllInfoBySummonerName();
-            res.status(200).send(data);
+            const response = await client.getAllInfoBySummonerName();
+            // Return clients response
+            res.status(200).send(response);
         } catch(err) {
             console.log(err);
             res.sendStatus(500);
