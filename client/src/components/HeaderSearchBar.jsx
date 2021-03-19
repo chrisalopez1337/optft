@@ -12,6 +12,10 @@ const Container = styled.div`
     }
 `;
 
+const Form = styled.form`
+    display: inherit;
+`;
+
 const Input = styled.input`
     border-left: 2px solid #e64545;
     border-top: 2px solid #e64545;
@@ -45,14 +49,32 @@ const Select = styled.select`
 `;
 
 
-export default function HeaderSearchBar() {
+export default function HeaderSearchBar({ search }) {
+    // Hold fields values
+    const [fields, setFields] = useState({ summonerName: '', region: 'NA' });
+    const { summonerName, region } = fields;
+    // Handler to set fields
+    function handleField(e) {
+        const { target } = e;
+        const { name, value } = target;
+        setFields({ ...fields, [name]: value });
+    }
+
+    // Submit handler
+    function handleSubmit(e) {
+        e.preventDefault();
+        search(summonerName);
+    }
+
     return (
         <Container>
-            <Input type="text" placeholder="Summoner Name..." />
-            <Select>
-                <option>NA</option>
-                <option>EU</option>
-            </Select>
+            <Form onSubmit={handleSubmit}>
+                <Input type="text" placeholder="Summoner Name..." name="summonerName" value={summonerName} onChange={handleField}/>
+                <Select value={region} onChange={handleField} name="region">
+                    <option value="NA">NA</option>
+                    <option>EU</option>
+                </Select>
+            </Form>
         </Container>
     );
 }

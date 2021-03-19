@@ -25,11 +25,11 @@ const Logo = styled.h2`
     color: #e64545;
 `;
 
-export default function Header() {
+export default function Header({ search }) {
     return (
         <Container>
             <Logo>optft.gg</Logo>
-            <HeaderSearchBar />
+            <HeaderSearchBar search={search} />
             <HeaderButtons />
         </Container>
     );
