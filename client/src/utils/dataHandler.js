@@ -36,7 +36,7 @@ class DataAnalysis {
         }
         return oldItems;
     }
-    
+
     accumulateUnitData(unitData, startingData = this.gameUnitData) {
         // Loop over each unit and accumulate it
         for (let i = 0; i < unitData.length; i++) {
@@ -47,10 +47,15 @@ class DataAnalysis {
             if (!startingData[character_id]) {
                 startingData[character_id] = {
                     count: 1,
-                    itemsCount: 
+                    itemsCount: accumulateItemsCount(items),
                 }
+            } else {
+                startingData[character_id].count++;
+                startindData[character_id].itemsCount = accumulateItemsCount(items, startingData[character_id].itemsCount);
             }
         }
+        this.gameUnitData = startingData;
+        return this.gameUnitData;
     }
 
     getSingleMatchData(gameInfo) {
@@ -99,7 +104,7 @@ class DataAnalysis {
         // Loop over every participant
         for (let i = 0; i < participants.length; i++) {
             const participant = participants[i];
-            const { gold_left, last_round, level, placement, players_eliminated, puuid, time_eliminated, total_damage_to_players, traits } = participant;
+            const { gold_left, last_round, level, placement, players_eliminated, puuid, time_eliminated, total_damage_to_players, traits, units } = participant;
             // At this point I may want to store a reformatted object with the usefull data for each player and then save it to the database.
             // Check if the player we are looking at is the player being searched.
             if (this.playerSearchedPuuid === puuid) {
@@ -122,7 +127,7 @@ class DataAnalysis {
             overall.averageTimeEliminated += time_eliminated;
             overall.averageDamageToPlayers += total_damage_to_players;
             overall.playersTraits[puuid] = this.getMainTrait(traits);
-            overall.playersUnits = 
+            overall.playersUnits = this.accumulateUnitData(units, this.gameUnitData); 
         }
     }
 }
