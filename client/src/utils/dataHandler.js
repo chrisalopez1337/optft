@@ -5,6 +5,7 @@ class DataAnalysis {
         this.matchData = allMatchInfo;
         this.allGames = [];
         this.playerSearchedPuuid = puuid;
+        this.gameUnitData = {};
     }
 
     getMainTrait(traitData) {
@@ -20,6 +21,36 @@ class DataAnalysis {
             }
         }
         return mainTrait;
+    }
+
+    accumulateItemsCount(newItems, oldItems = {}) {
+        // Loop over each item and add it to the items
+        for (let i = 0; i < newItems.length; i++) {
+            const item = newItems[i];
+            // Check if that item has been tracked yet
+            if (!oldItems[item]) {
+                oldItems[item] = 1;
+            } else {
+                oldItems[item]++;
+            }
+        }
+        return oldItems;
+    }
+    
+    accumulateUnitData(unitData, startingData = this.gameUnitData) {
+        // Loop over each unit and accumulate it
+        for (let i = 0; i < unitData.length; i++) {
+            const unit = unitData[i];
+            // Pull data out of unit
+            const { character_id, items, rarity, tier } = unit; 
+            // Check if the unit already exists in the map
+            if (!startingData[character_id]) {
+                startingData[character_id] = {
+                    count: 1,
+                    itemsCount: 
+                }
+            }
+        }
     }
 
     getSingleMatchData(gameInfo) {
@@ -38,8 +69,8 @@ class DataAnalysis {
             averagePlayersEliminated: 0,
             averageTimeEliminated: 0,
             averageDamageToPlayers: 0,
-            averageTraits: {},
-            averageUnits: {},
+            playersTraits: {},
+            playersUnits: {},
         };
         // Store the individual players data
         const player = {
@@ -68,7 +99,7 @@ class DataAnalysis {
         // Loop over every participant
         for (let i = 0; i < participants.length; i++) {
             const participant = participants[i];
-            const { gold_left, last_round, level, placement, players_eliminated, puuid, time_eliminated, total_damage_to_players } = participant;
+            const { gold_left, last_round, level, placement, players_eliminated, puuid, time_eliminated, total_damage_to_players, traits } = participant;
             // At this point I may want to store a reformatted object with the usefull data for each player and then save it to the database.
             // Check if the player we are looking at is the player being searched.
             if (this.playerSearchedPuuid === puuid) {
@@ -80,8 +111,18 @@ class DataAnalysis {
                 player.playersEliminated = players_eliminated;
                 player.timeEliminated = time_eliminated;
                 player.damageToPlayers = total_damage_to_players;
-
+                player.mainTrait = this.getMainTrait(traits);
             }
+
+            // Add up overall data
+            overall.averageGoldLeft += gold_left;
+            overall.averageLastRound += last_round;
+            overall.averageLevel += level;
+            overall.averagePlayersEliminated += players_eliminated;
+            overall.averageTimeEliminated += time_eliminated;
+            overall.averageDamageToPlayers += total_damage_to_players;
+            overall.playersTraits[puuid] = this.getMainTrait(traits);
+            overall.playersUnits = 
         }
     }
 }
