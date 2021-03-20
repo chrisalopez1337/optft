@@ -16,6 +16,11 @@ class DataAnalysis {
         }
     }
 
+    getDifferenceInPercentage(oldNumber, newNumber) {
+        const decreaseValue = oldNumber - newNumber;
+        return (decreaseValue / oldNumber) * 100;
+    }
+
     getMainTrait(traitData) {
         // Tier current should be the amount of units they have at the end of the game.
         let mainTrait = { name: '', rank: 0 };
@@ -145,9 +150,26 @@ class DataAnalysis {
         overall.averagePlayersEliminated = this.getAverage(overall.averageLevel, 8, true);
         overall.averageTimeEliminated = this.getAverage(overall.averageTimeEliminated, 8, true);
         overall.averageDamageToPlayers = this.getAverage(overall.averageDamageToPlayers, 8, true);
-        
-        this.allGames.push({ player, overall });
-        return { player, overall };
+
+        // Now get the percentage difference for the player vs the lobby
+        const difference = {
+            goldLeft: 0,
+            lastRound: 0,
+            level: 0,
+            playersEliminated: 0,
+            timeEliminated: 0,
+            damageToPlayers: 0,
+        }
+        // this.getDifferenceInPercentage
+        difference.goldLeft = this.getDifferenceInPercentage(player.goldLeft, overall.averageGoldLeft);
+        difference.lastRound = this.getDifferenceInPercentage(player.lastRound, overall.averageLastRound);
+        difference.level = this.getDifferenceInPercentage(player.level, overall.averageLevel);
+        difference.playersEliminated = this.getDifferenceInPercentage(player.playersEliminated, overall.averagePlayersEliminated);
+        difference.timeEliminated = this.getDifferenceInPercentage(player.timeEliminated, overall.averageTimeEliminated);
+        difference.damageToPlayers = this.getDifferenceInPercentage(player.damageToPlayers, overall.averageDamageToPlayers);
+
+        this.allGames.push({ player, overall, difference });
+        return { player, overall, difference };
     }
 }
 
