@@ -8,6 +8,7 @@ class DataAnalysis {
         this.gameUnitData = {};
     }
 
+    /* _____________________ MATH HELPERS ______________________ */
     getAverage(num, divider, floor = false) {
         if (floor) {
             return Math.floor(num / divider);
@@ -20,7 +21,14 @@ class DataAnalysis {
         const decreaseValue = oldNumber - newNumber;
         return (decreaseValue / oldNumber) * 100;
     }
+    /* _________________________________________________________ */
 
+    /* Info: Gets the trait with the highest number of units for a single participants trait array
+     * Params
+     * @traitData: Array
+     * Returns 
+     * @mainTrait: { name: String, rank: Integer }
+     */
     getMainTrait(traitData) {
         // Tier current should be the amount of units they have at the end of the game.
         let mainTrait = { name: '', rank: 0 };
@@ -36,6 +44,13 @@ class DataAnalysis {
         return mainTrait;
     }
 
+    /* Info: Takes in an object of items with the count of how many times they have been used, and then accumulates that given a new items array
+     * Params
+     * @newItems: Array
+     * @oldItems: Object
+     * Returns 
+     * @oldItems: { itemId: numOfTimesUsed<Integer> }
+     */
     accumulateItemsCount(newItems, oldItems = {}) {
         // Loop over each item and add it to the items
         for (let i = 0; i < newItems.length; i++) {
@@ -50,6 +65,13 @@ class DataAnalysis {
         return oldItems;
     }
 
+    /* Info: Takes in an array of unitData and the overall unit data for a game, accumulated the amount of times a single unit is seen as well as how often certain items are built onto that unit
+     * Params
+     * @unitData: Array
+     * @startingData: Object
+     * Returns 
+     * @gameUnitData: { unit_name: { count: <Integer>, itemsCount: { itemId: count<Integer, ... } } };
+     */
     accumulateUnitData(unitData, startingData = this.gameUnitData) {
         // Loop over each unit and accumulate it
         for (let i = 0; i < unitData.length; i++) {
@@ -71,6 +93,12 @@ class DataAnalysis {
         return this.gameUnitData;
     }
 
+    /* Info: Accumulates complete game data for a single match, and then returns the searched players info, the average of all players in that match, as well as the differential in that single match
+     * Params
+     * @gameInfo: Array (Single match info)
+     * Returns 
+     * @Object: { overall: [Object], player: [Object], difference: [Object] }
+     */
     getSingleMatchData(gameInfo) {
         // Set result objects
         const overall = {
@@ -170,6 +198,10 @@ class DataAnalysis {
 
         this.allGames.push({ player, overall, difference });
         return { player, overall, difference };
+    }
+
+    getOverallAverage() {
+
     }
 }
 
