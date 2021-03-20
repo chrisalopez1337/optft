@@ -7,7 +7,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon server/index.js",
-    "react-dev": "webpack -d --watch"
+    "react-dev": "webpack -d --watch",
+    "test-data": "mocha testing/dataAnalysis.js"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -28,8 +29,10 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
+    "chai": "^4.3.4",
     "html-loader": "^1.3.0",
     "html-webpack-plugin": "^4.4.1",
+    "mocha": "^8.3.2",
     "url-loader": "^4.1.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",

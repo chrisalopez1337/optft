@@ -8,12 +8,20 @@ class DataAnalysis {
         this.gameUnitData = {};
     }
 
+    getAverage(num, divider, floor = false) {
+        if (floor) {
+            return Math.floor(num / divider);
+        } else {
+            return num / divider;
+        }
+    }
+
     getMainTrait(traitData) {
         // Tier current should be the amount of units they have at the end of the game.
         let mainTrait = { name: '', rank: 0 };
         // loop over every trait
         for (let i = 0; i < traitData.length; i++) {
-            const trait = taitData[i];
+            const trait = traitData[i];
             const { name, tier_current } = trait;
             if (mainTrait.rank < tier_current) {
                 mainTrait.name = name;
@@ -47,11 +55,11 @@ class DataAnalysis {
             if (!startingData[character_id]) {
                 startingData[character_id] = {
                     count: 1,
-                    itemsCount: accumulateItemsCount(items),
+                    itemsCount: this.accumulateItemsCount(items),
                 }
             } else {
                 startingData[character_id].count++;
-                startindData[character_id].itemsCount = accumulateItemsCount(items, startingData[character_id].itemsCount);
+                startingData[character_id].itemsCount = this.accumulateItemsCount(items, startingData[character_id].itemsCount);
             }
         }
         this.gameUnitData = startingData;
@@ -129,6 +137,15 @@ class DataAnalysis {
             overall.playersTraits[puuid] = this.getMainTrait(traits);
             overall.playersUnits = this.accumulateUnitData(units, this.gameUnitData); 
         }
+
+        // Then get the averages for each section
+        overall.averageGoldLeft = this.getAverage(overall.averageGoldLeft, 8, true);
+        overall.averageLastRound = this.getAverage(overall.averageLastRound, 8, true);
+        overall.averageLevel = this.getAverage(overall.averageLevel, 8, true);
+        overall.averagePlayersEliminated = this.getAverage(overall.averageLevel, 8, true);
+        overall.averageTimeEliminated = this.getAverage(overall.averageTimeEliminated, 8, true);
+        overall.averageDamageToPlayers = this.getAverage(overall.averageDamageToPlayers, 8, true);
+        
         this.allGames.push({ player, overall });
         return { player, overall };
     }
