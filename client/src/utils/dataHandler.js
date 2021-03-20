@@ -129,6 +129,8 @@ class DataAnalysis {
             overall.playersTraits[puuid] = this.getMainTrait(traits);
             overall.playersUnits = this.accumulateUnitData(units, this.gameUnitData); 
         }
+        this.allGames.push({ player, overall });
+        return { player, overall };
     }
 }
 
