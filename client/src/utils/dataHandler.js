@@ -27,10 +27,10 @@ class DataAnalysis {
         // loop over every trait
         for (let i = 0; i < traitData.length; i++) {
             const trait = traitData[i];
-            const { name, tier_current } = trait;
-            if (mainTrait.rank < tier_current) {
+            const { name, num_units } = trait;
+            if (mainTrait.rank < num_units) {
                 mainTrait.name = name;
-                mainTrait.rank = tier_current;
+                mainTrait.rank = num_units;
             }
         }
         return mainTrait;
