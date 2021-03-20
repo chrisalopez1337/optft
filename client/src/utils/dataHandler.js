@@ -4,12 +4,27 @@ class DataAnalysis {
         this.allData = allData;
         this.matchData = allMatchInfo;
         this.allGames = [];
-        this.playersPuuid = puuid;
+        this.playerSearchedPuuid = puuid;
+    }
+
+    getMainTrait(traitData) {
+        // Tier current should be the amount of units they have at the end of the game.
+        let mainTrait = { name: '', rank: 0 };
+        // loop over every trait
+        for (let i = 0; i < traitData.length; i++) {
+            const trait = taitData[i];
+            const { name, tier_current } = trait;
+            if (mainTrait.rank < tier_current) {
+                mainTrait.name = name;
+                mainTrait.rank = tier_current;
+            }
+        }
+        return mainTrait;
     }
 
     getSingleMatchData(gameInfo) {
         // Set result objects
-        const game = {
+        const overall = {
             metadata: {
                 participants: [],
                 match_id: '',
@@ -28,28 +43,46 @@ class DataAnalysis {
         };
         // Store the individual players data
         const player = {
+            placement: 0,
             goldLeft: 0,
             lastRound: 0,
             level: 0,
             playersEliminated: 0,
             timeEliminated: 0,
             damageToPlayers: 0,
-            traits: {},
-            units: {},
+            mainTrait: {},
         }
 
         // Get raw data from the game info.
         const { metadata, info } = gameInfo;
 
         // Store the metadata info to the single game
-        game.metadata.participants = metadata.participants;
-        game.metadata.match_id = metadata.match_id;
-        game.metadata.game_date = info.game_datetime;
-        game.metadata.game_length = info.game_length;
+        overall.metadata.participants = metadata.participants;
+        overall.metadata.match_id = metadata.match_id;
+        overall.metadata.game_date = info.game_datetime;
+        overall.metadata.game_length = info.game_length;
 
         // Get the non-meta data from the game
         const { participants } = info;
         
+        // Loop over every participant
+        for (let i = 0; i < participants.length; i++) {
+            const participant = participants[i];
+            const { gold_left, last_round, level, placement, players_eliminated, puuid, time_eliminated, total_damage_to_players } = participant;
+            // At this point I may want to store a reformatted object with the usefull data for each player and then save it to the database.
+            // Check if the player we are looking at is the player being searched.
+            if (this.playerSearchedPuuid === puuid) {
+                // Store that single players data
+                player.placement = placement;
+                player.goldLeft = gold_left;
+                player.lastRound = last_round;
+                player.level = level;
+                player.playersEliminated = players_eliminated;
+                player.timeEliminated = time_eliminated;
+                player.damageToPlayers = total_damage_to_players;
+
+            }
+        }
     }
 }
 
