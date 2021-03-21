@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+// Utility functions
+import DataAnalysis from '../utils/dataHandler.js';
 // Children components
 import Header from './Header.jsx';
 import LandingPage from './LandingPage.jsx';
@@ -20,8 +22,9 @@ export default function App() {
     function searchAllInfo(summonerName) {
         axios.get(`/api/data/summoner/by-name/${summonerName}/all`)
             .then(({ data }) => {
-                // This is where we would process and format the data
-                setSearchedData(data);
+                const Analyze = new DataAnalysis(data);
+                const parsed = Analyze.getOverallAverage();
+                setSearchedData(parsed);
             })
             .catch(console.log);
     }

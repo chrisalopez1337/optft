@@ -28,11 +28,11 @@ const Container = styled.div`
     }
 `;
 
-export default function InfoPageGeneralStats() {
+export default function InfoPageGeneralStats({ data }) {
     return (
         <Container>
-            <InfoPageOverview />
-            <InfoPageRecommended />
+            <InfoPageOverview data={data} />
+            <InfoPageRecommended data={data} />
         </Container>
     );
 }

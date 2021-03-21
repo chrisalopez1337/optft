@@ -23,12 +23,12 @@ const Summoner = styled.h1`
     }
 `;
 
-export default function InfoPage() {
+export default function InfoPage({ data }) {
     let testArray = [ 1, 2 ];
     return (
         <Container>
             <Summoner>Summoner Name</Summoner>
-            <InfoPageGeneralStats />
+            <InfoPageGeneralStats data={data} />
             { testArray.map(number => <InfoPageGameContainer />)}        
         </Container>
     );

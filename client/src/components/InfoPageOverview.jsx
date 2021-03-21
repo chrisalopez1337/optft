@@ -54,15 +54,20 @@ const PercentageUl = styled.ul`
     list-style-type: none;
 `;
 
-export default function InfoPageOverview() {
+export default function InfoPageOverview({ data }) {
+    const { playerAverages, overallAverages, overallDifference } = data;
+
     return (
         <Container>
             <LeftTextColumn>
                 <h3>Your Average</h3>
                 <Ul>
-                    <li>Winrate</li>
-                    <li>Gold not spent</li>
-                    <li>Average level</li>
+                    <li>Gold left: {playerAverages.goldLeft}</li>
+                    <li>Last Round: {playerAverages.lastRound}</li>
+                    <li>Gold left: {playerAverages.goldLeft}</li>
+                    <li>Gold left: {playerAverages.goldLeft}</li>
+                    <li>Gold left: {playerAverages.goldLeft}</li>
+                    <li>Gold left: {playerAverages.goldLeft}</li>
                 </Ul>
             </LeftTextColumn>
             
