@@ -9,6 +9,11 @@ describe('Data Analysis Script', async () => {
         const analysis = new DataAnalysis(data);
         const singleGame = analysis.matchData.game1;
         const result = analysis.getSingleMatchData(singleGame);
+    });
+    it('Should be able to analyze a singles games data', async () => {
+        const { data } = await axios.get('http://localhost:1337/api/data/summoner/by-name/scarra/all');
+        const analysis = new DataAnalysis(data);
+        const result = analysis.getOverallAverage();
         console.log(result);
     });
 });

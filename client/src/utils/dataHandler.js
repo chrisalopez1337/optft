@@ -264,16 +264,16 @@ class DataAnalysis {
         playerAverages.lastRound = this.getAverage(playerAverages.lastRound, divider, true);
         playerAverages.level = this.getAverage(playerAverages.level, divider, true);
         playerAverages.playersEliminated = this.getAverage(playerAverages.playersEliminated, divider, true);
-        playerAverages.timeEliminted = this.getAverage(playerAverages.timeEliminated, divider, true);
-        playerAverages.damageToPlayers = this.getAverage(playerAverages.timeEliminated, divider, true);
+        playerAverages.timeEliminated = this.getAverage(playerAverages.timeEliminated, divider);
+        playerAverages.damageToPlayers = this.getAverage(playerAverages.damageToPlayers, divider, true);
 
         // Overall averaging
-        overallAverages.averageGoldLeft = this.getAverage(overall.averageGoldLeft, divider, true);
-        overallAverages.averageLastRound = this.getAverage(overall.averageLastRound, divider, true);
-        overallAverages.averageLevel = this.getAverage(overall.averageLevel, divider, true);
-        overallAverages.averagePlayersEliminated = this.getAverage(overall.averagePlayersEliminated, divider, true);
-        overallAverages.averageTimeEliminated = this.getAverage(overall.averageTimeEliminated, divider, true);
-        overallAverages.averageDamageToPlayers = this.getAverage(overall.averageDamageToPlayers, divider, true);
+        overallAverages.averageGoldLeft = this.getAverage(overallAverages.averageGoldLeft, divider, true);
+        overallAverages.averageLastRound = this.getAverage(overallAverages.averageLastRound, divider, true);
+        overallAverages.averageLevel = this.getAverage(overallAverages.averageLevel, divider, true);
+        overallAverages.averagePlayersEliminated = this.getAverage(overallAverages.averagePlayersEliminated, divider, true);
+        overallAverages.averageTimeEliminated = this.getAverage(overallAverages.averageTimeEliminated, divider);
+        overallAverages.averageDamageToPlayers = this.getAverage(overallAverages.averageDamageToPlayers, divider, true);
 
         // Calculate the difference in percentage
         overallDifference.goldLeft = this.getDifferenceInPercentage(playerAverages.goldLeft, overallAverages.averageGoldLeft);
@@ -283,7 +283,7 @@ class DataAnalysis {
         overallDifference.timeEliminated = this.getDifferenceInPercentage(playerAverages.timeEliminated, overallAverages.averageTimeEliminated);
         overallDifference.damageToPlayers = this.getDifferenceInPercentage(playerAverages.damageToPlayers, overallAverages.averageDamageToPlayers);
 
-
+        return { playerAverages, overallAverages, overallDifference };
     }
 }
 
