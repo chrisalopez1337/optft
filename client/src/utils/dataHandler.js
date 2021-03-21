@@ -168,7 +168,7 @@ class DataAnalysis {
             overall.averagePlayersEliminated += players_eliminated;
             overall.averageTimeEliminated += time_eliminated;
             overall.averageDamageToPlayers += total_damage_to_players;
-            overall.playersTraits[puuid] = this.getMainTrait(traits);
+            overall.playersTraits[puuid] = this.getMainTrait(traits, placement);
             overall.playersUnits = this.accumulateUnitData(units, this.gameUnitData); 
         }
 
@@ -202,7 +202,7 @@ class DataAnalysis {
 
     accumulatePlayerTraits(accumulator, trait) {
         const { name, win, rank } = trait;
-        if (!acuumulator[name]) {
+        if (!accumulator[name]) {
             if (win) {
                 accumulator[name] = { win: 1 };
             } else {
@@ -210,9 +210,29 @@ class DataAnalysis {
             }
         } else {
             if (win) {
-                accumulator[name]++;
+                accumulator[name].win++;
             } else {
-                accumulator[name]--;
+                accumulator[name].win--;
+            }
+        }
+        return accumulator;
+    }
+
+    accumulateOverallPlayerTraits(accumulator, objOfTraits) {
+        for (const player in objOfTraits) {
+            const { name, win, rank } = objOfTraits[player];
+            if (!accumulator[name]) {
+                if (win) {
+                    accumulator[name] = { win: 1 }; 
+                } else {
+                    accumulator[name] = { win: 0 };
+                }
+            } else {
+                if (win) {
+                    accumulator[name].win++;
+                } else {
+                    accumulator[name].win--;
+                }
             }
         }
         return accumulator;
@@ -239,7 +259,6 @@ class DataAnalysis {
             averageTimeEliminated: 0,
             averageDamageToPlayers: 0,
             playersTraits: {},
-            playersUnits: {},
         };
 
         const overallDifference = {
@@ -274,6 +293,7 @@ class DataAnalysis {
             overallAverages.averagePlayersEliminated += overall.averagePlayersEliminated;
             overallAverages.averageTimeEliminated += overall.averageTimeEliminated;
             overallAverages.averageDamageToPlayers += overall.averageDamageToPlayers;
+            overallAverages.playersTraits = this.accumulateOverallPlayerTraits(overallAverages.playersTraits, overall.playersTraits);
             // Either need to write a seperate function to collect unit/trait/item data or refactor the existing ones to support accumulation.
         }
 

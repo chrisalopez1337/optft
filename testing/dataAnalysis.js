@@ -14,6 +14,6 @@ describe('Data Analysis Script', async () => {
         const { data } = await axios.get('http://localhost:1337/api/data/summoner/by-name/scarra/all');
         const analysis = new DataAnalysis(data);
         const result = analysis.getOverallAverage();
-        console.log(result);
+        console.log(result.overallAverages);
     });
 });
