@@ -64,9 +64,9 @@ export default function InfoPageOverview({ data }) {
                 <Ul>
                     <li>Gold left: {playerAverages.goldLeft}</li>
                     <li>Last Round: {playerAverages.lastRound}</li>
-                    <li>Gold left: {playerAverages.goldLeft}</li>
-                    <li>Gold left: {playerAverages.goldLeft}</li>
-                    <li>Gold left: {playerAverages.goldLeft}</li>
+                    <li>Level: {playerAverages.level}</li>
+                    <li>Players Eliminated: {playerAverages.playersEliminated}</li>
+                    <li>Time Eliminated: {playerAverages.timeEliminated}</li>
                     <li>Gold left: {playerAverages.goldLeft}</li>
                 </Ul>
             </LeftTextColumn>
