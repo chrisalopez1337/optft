@@ -200,8 +200,62 @@ class DataAnalysis {
         return { player, overall, difference };
     }
 
-    getOverallAverage() {
 
+    getOverallAverage() {
+        // store results
+        const playerAverages = {
+            goldLeft: 0,
+            lastRound: 0,
+            level: 0,
+            playersEliminated: 0,
+            timeEliminated: 0,
+            damageToPlayers: 0,
+        };
+
+        const overallAverages = {
+            averageGoldLeft: 0,
+            averageLastRound: 0,
+            averageLevel: 0,
+            averagePlayersEliminated: 0,
+            averageTimeEliminated: 0,
+            averageDamageToPlayers: 0,
+            playersTraits: {},
+            playersUnits: {},
+        };
+
+        const overallDifference = {
+            goldLeft: 0,
+            lastRound: 0,
+            level: 0,
+            playersEliminated: 0,
+            timeEliminated: 0,
+            damageToPlayers: 0,
+        };
+
+        // Loop over every game
+        for (const key in this.matchData) {
+            const game = this.matchData[key];
+            // Get a singular response from a game
+            const { player, overall } = this.getSingleMatchData(game);
+            
+            // Accumulate that data to our averages for the player 
+            playerAverages.goldLeft += player.goldLeft;
+            playerAverages.lastRound += player.lastRound;
+            playerAverages.level += player.level;
+            playerAverages.playersEliminated += player.playersEliminated;
+            playerAverages.timeEliminated += player.timeEliminated;
+            playerAverages.damageToPlayers += player.damageToPlayers;
+
+            // Accumulate that data to our averages for the overall
+            overallAverages.averageGoldLeft += overall.averageGoldLeft;
+            overallAverages.averageLastRound += overall.averageLastRound;
+            overallAverages.averageLevel += overall.averageLevel;
+            overallAverages.averagePlayersEliminated += overall.averagePlayersEliminated;
+            overallAverages.averageTimeEliminated += overall.averageTimeEliminated;
+            overallAverages.averageDamageToPlayers += overall.averageDamageToPlayers;
+
+
+        }
     }
 }
 
