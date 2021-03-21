@@ -29,9 +29,10 @@ class DataAnalysis {
      * Returns 
      * @mainTrait: { name: String, rank: Integer }
      */
-    getMainTrait(traitData) {
+    getMainTrait(traitData, placement) {
         // Tier current should be the amount of units they have at the end of the game.
-        let mainTrait = { name: '', rank: 0 };
+        const win = placement >= 4 ? true : false;
+        let mainTrait = { name: '', rank: 0, win };
         // loop over every trait
         for (let i = 0; i < traitData.length; i++) {
             const trait = traitData[i];
@@ -157,7 +158,7 @@ class DataAnalysis {
                 player.playersEliminated = players_eliminated;
                 player.timeEliminated = time_eliminated;
                 player.damageToPlayers = total_damage_to_players;
-                player.mainTrait = this.getMainTrait(traits);
+                player.mainTrait = this.getMainTrait(traits, placement);
             }
 
             // Add up overall data
