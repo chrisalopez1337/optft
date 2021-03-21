@@ -188,7 +188,6 @@ class DataAnalysis {
             timeEliminated: 0,
             damageToPlayers: 0,
         }
-        // this.getDifferenceInPercentage
         difference.goldLeft = this.getDifferenceInPercentage(player.goldLeft, overall.averageGoldLeft);
         difference.lastRound = this.getDifferenceInPercentage(player.lastRound, overall.averageLastRound);
         difference.level = this.getDifferenceInPercentage(player.level, overall.averageLevel);
@@ -276,7 +275,13 @@ class DataAnalysis {
         overallAverages.averageTimeEliminated = this.getAverage(overall.averageTimeEliminated, divider, true);
         overallAverages.averageDamageToPlayers = this.getAverage(overall.averageDamageToPlayers, divider, true);
 
-
+        // Calculate the difference in percentage
+        overallDifference.goldLeft = this.getDifferenceInPercentage(playerAverages.goldLeft, overallAverages.averageGoldLeft);
+        overallDifference.lastRound = this.getDifferenceInPercentage(playerAverages.lastRound, overallAverages.averageLastRound);
+        overallDifference.level = this.getDifferenceInPercentage(playerAverages.level, overallAverages.averageLevel);
+        overallDifference.playersEliminated = this.getDifferenceInPercentage(playerAverages.playersEliminated, overallAverages.averagePlayersEliminated);
+        overallDifference.timeEliminated = this.getDifferenceInPercentage(playerAverages.timeEliminated, overallAverages.averageTimeEliminated);
+        overallDifference.damageToPlayers = this.getDifferenceInPercentage(playerAverages.damageToPlayers, overallAverages.averageDamageToPlayers);
 
 
     }
