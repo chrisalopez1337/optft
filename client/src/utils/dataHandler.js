@@ -200,6 +200,24 @@ class DataAnalysis {
         return { player, overall, difference };
     }
 
+    accumulatePlayerTraits(accumulator, trait) {
+        const { name, win, rank } = trait;
+        if (!acuumulator[name]) {
+            if (win) {
+                accumulator[name] = { win: 1 };
+            } else {
+                accumulator[name] = { win: 0 };
+            }
+        } else {
+            if (win) {
+                accumulator[name]++;
+            } else {
+                accumulator[name]--;
+            }
+        }
+        return accumulator;
+    }
+
 
     getOverallAverage() {
         // store results
@@ -210,6 +228,7 @@ class DataAnalysis {
             playersEliminated: 0,
             timeEliminated: 0,
             damageToPlayers: 0,
+            playerTraits: {}
         };
 
         const overallAverages = {
@@ -245,6 +264,7 @@ class DataAnalysis {
             playerAverages.playersEliminated += player.playersEliminated;
             playerAverages.timeEliminated += player.timeEliminated;
             playerAverages.damageToPlayers += player.damageToPlayers;
+            playerAverages.playerTraits = this.accumulatePlayerTraits(playerAverages.playerTraits, player.mainTrait);
             // Either need to write a seperate function to collect unit/trait/item data or refactor the existing ones to support accumulation.
 
             // Accumulate that data to our averages for the overall
