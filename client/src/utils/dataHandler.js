@@ -253,9 +253,21 @@ class DataAnalysis {
             overallAverages.averagePlayersEliminated += overall.averagePlayersEliminated;
             overallAverages.averageTimeEliminated += overall.averageTimeEliminated;
             overallAverages.averageDamageToPlayers += overall.averageDamageToPlayers;
-
-
+            // Either need to write a seperate function to collect unit/trait/item data or refactor the existing ones to support accumulation.
         }
+
+        // Collect averages and then get the differences
+        const divider = this.allGames.length;
+
+        // Single player averaging
+        playerAverages.goldLeft = this.getAverage(playerAverages.goldLeft, divider, true);
+        playerAverages.lastRound = this.getAverage(playerAverages.lastRound, divider, true);
+        playerAverages.level = this.getAverage(playerAverages.level, divider, true);
+        playerAverages.playersEliminated = this.getAverage(playerAverages.playersEliminated, divider, true);
+        playerAverages.timeEliminted = this.getAverage(playerAverages.timeEliminated, divider, true);
+        playerAverages.damageToPlayers = this.getAverage(playerAverages.timeEliminated, divider, true);
+
+
     }
 }
 
