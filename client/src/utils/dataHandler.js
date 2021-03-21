@@ -245,6 +245,7 @@ class DataAnalysis {
             playerAverages.playersEliminated += player.playersEliminated;
             playerAverages.timeEliminated += player.timeEliminated;
             playerAverages.damageToPlayers += player.damageToPlayers;
+            // Either need to write a seperate function to collect unit/trait/item data or refactor the existing ones to support accumulation.
 
             // Accumulate that data to our averages for the overall
             overallAverages.averageGoldLeft += overall.averageGoldLeft;
@@ -266,6 +267,16 @@ class DataAnalysis {
         playerAverages.playersEliminated = this.getAverage(playerAverages.playersEliminated, divider, true);
         playerAverages.timeEliminted = this.getAverage(playerAverages.timeEliminated, divider, true);
         playerAverages.damageToPlayers = this.getAverage(playerAverages.timeEliminated, divider, true);
+
+        // Overall averaging
+        overallAverages.averageGoldLeft = this.getAverage(overall.averageGoldLeft, divider, true);
+        overallAverages.averageLastRound = this.getAverage(overall.averageLastRound, divider, true);
+        overallAverages.averageLevel = this.getAverage(overall.averageLevel, divider, true);
+        overallAverages.averagePlayersEliminated = this.getAverage(overall.averagePlayersEliminated, divider, true);
+        overallAverages.averageTimeEliminated = this.getAverage(overall.averageTimeEliminated, divider, true);
+        overallAverages.averageDamageToPlayers = this.getAverage(overall.averageDamageToPlayers, divider, true);
+
+
 
 
     }
