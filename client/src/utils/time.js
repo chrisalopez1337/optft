@@ -1,8 +1,8 @@
 module.exports = {
     secondsToMinutes(seconds) {
-        let minutes = Math.floor(time / 60);
-        let seconds = time - minutes * 60;
-        const result = minutes.toString() + 'm ' + seconds.toString() + 's';
+        let minutes = Math.floor(seconds / 60);
+        let secondsLeft = Math.floor(seconds - minutes * 60);
+        const result = minutes.toString() + 'm ' + secondsLeft.toString() + 's';
         return result;
     }
 }

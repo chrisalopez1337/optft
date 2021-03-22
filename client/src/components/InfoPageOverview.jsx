@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+// Utils
+import { secondsToMinutes } from '../utils/time.js'; 
+import { percentageCreator } from '../utils/strings.js';
+// Children components
+import Percentage from './Percentage.jsx';
 
 // Styled
 const Container = styled.div`
@@ -66,8 +71,7 @@ export default function InfoPageOverview({ data }) {
                     <li>Last Round: {playerAverages.lastRound}</li>
                     <li>Level: {playerAverages.level}</li>
                     <li>Players Eliminated: {playerAverages.playersEliminated}</li>
-                    <li>Time Eliminated: {playerAverages.timeEliminated}</li>
-                    <li>Gold left: {playerAverages.goldLeft}</li>
+                    <li>Time Eliminated: {secondsToMinutes(playerAverages.timeEliminated)}</li>
                 </Ul>
             </LeftTextColumn>
             
@@ -78,9 +82,11 @@ export default function InfoPageOverview({ data }) {
             <RightTextColumn>
                 <h3>Peers Average</h3>
                 <Ul>
-                    <li>Winrate</li>
-                    <li>Gold not spent</li>
-                    <li>Average level</li>
+                    <li>Gold left: {overallAverages.averageGoldLeft}</li>
+                    <li>Last Round: {overallAverages.averageLastRound}</li>
+                    <li>Level: {overallAverages.level}</li>
+                    <li>Players Eliminated: {overallAverages.averagePlayersEliminated}</li>
+                    <li>Time Eliminated: {secondsToMinutes(overallAverages.averageTimeEliminated)}</li>
                 </Ul>
             </RightTextColumn>
 
@@ -91,7 +97,7 @@ export default function InfoPageOverview({ data }) {
             <PercentageColumn>
                 <h3>Difference</h3>
                 <PercentageUl>
-                    <li>55%</li>
+                    <Percentage percentObj={percentageCreator(overallDifference.goldLeft)} />
                     <li>55%</li>
                     <li>55%</li>
                 </PercentageUl>
