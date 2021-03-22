@@ -84,7 +84,7 @@ export default function InfoPageOverview({ data }) {
                 <Ul>
                     <li>Gold left: {overallAverages.averageGoldLeft}</li>
                     <li>Last Round: {overallAverages.averageLastRound}</li>
-                    <li>Level: {overallAverages.level}</li>
+                    <li>Level: {overallAverages.averageLevel}</li>
                     <li>Players Eliminated: {overallAverages.averagePlayersEliminated}</li>
                     <li>Time Eliminated: {secondsToMinutes(overallAverages.averageTimeEliminated)}</li>
                 </Ul>
@@ -98,8 +98,10 @@ export default function InfoPageOverview({ data }) {
                 <h3>Difference</h3>
                 <PercentageUl>
                     <Percentage percentObj={percentageCreator(overallDifference.goldLeft)} />
-                    <li>55%</li>
-                    <li>55%</li>
+                    <Percentage percentObj={percentageCreator(overallDifference.lastRound)} />
+                    <Percentage percentObj={percentageCreator(overallDifference.level)} />
+                    <Percentage percentObj={percentageCreator(overallDifference.playersEliminated)} />
+                    <Percentage percentObj={percentageCreator(overallDifference.timeEliminated)} />
                 </PercentageUl>
             </PercentageColumn>
         </Container>
