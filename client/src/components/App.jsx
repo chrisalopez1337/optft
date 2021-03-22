@@ -16,12 +16,23 @@ const Container = styled.div`
 `;
 
 export default function App() {
+    // Store general data
+    const [summoner, setSummoner] = useState(null);
+
+    // Summoner handler
+    function parseSummoner(data) {
+        const { summonerName } = data; // Will parse our more later
+        const summoner = { summonerName };
+        setSummoner(summoner);
+    }
+
     // Store searched data
     const [searchedData, setSearchedData] = useState(null);
     // Function to query that data, and then set it.
     function searchAllInfo(summonerName) {
         axios.get(`/api/data/summoner/by-name/${summonerName}/all`)
             .then(({ data }) => {
+                parseSummoner(data);
                 const Analyze = new DataAnalysis(data);
                 const parsed = Analyze.getOverallAverage();
                 setSearchedData(parsed);
@@ -31,7 +42,7 @@ export default function App() {
 
     // Conditional rendering for landing page vs Info Page 
     const pageRender = searchedData
-        ? (<InfoPage data={searchedData} />)
+        ? (<InfoPage data={searchedData} summoner={summoner}/>)
         : (<LandingPage search={searchAllInfo} />)
 
     return (
