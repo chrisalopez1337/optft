@@ -13,14 +13,14 @@ const Container = styled.div`
     padding: 10px;
     border: 2px solid #e64545;
     border-radius: 7px;
-    min-width: 800px;
+    max-width: 800px;
     background-color: #140f0f;
     @media (max-width: 860px) {
-        min-width: 600px;
+        max-width: 600px;
     }
 
     @media (max-width: 665px) {
-        min-width: 400px;
+        max-width: 400px;
     }
 
     @media (max-width: 542px) {

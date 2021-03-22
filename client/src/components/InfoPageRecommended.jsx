@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+// Utils
+import RecommendHandler from '../utils/recommendHandler.js';
 
 // Styling
 const Container = styled.div`
@@ -18,11 +20,15 @@ const Container = styled.div`
     margin-bottom: 14px;
 `;
 
-export default function InfoPageRecommended() {
+export default function InfoPageRecommended({ data }) {
+    const { overallDifference } = data;
+    const Handler = new RecommendHandler(overallDifference);
     return (
         <Container>
             <h2>Our Recommendations</h2>
-            <p>Due to your low [ x item ] we would recommend you play more [ x ]</p>
+            <ul>
+                <li>{Handler.generateGoldString()}</li>
+            </ul>
         </Container>
     );
 }
