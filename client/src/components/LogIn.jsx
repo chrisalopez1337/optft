@@ -29,6 +29,21 @@ const Form = styled.form`
     flex-direction: column;
 `;
 
+const ErrorMessage = styled.div`
+    font-size: 16px;
+    max-width: 75%;
+    color: red;
+    margin: 4px;
+`;
+
+const SuccessMessage = styled.div`
+    font-size: 16px;
+    max-width: 75%;
+    color: green;
+    margin: 4px;
+`;
+
+
 const Input = styled.input`
    background-color: transparent;
    border: 1.5px solid #e64545;
@@ -83,19 +98,63 @@ const SignUpButton = styled.button`
     }
 `;
 
-export default function LogIn() {
+export default function LogIn({ setRenderView }) {
+
+    // Set up form data
+    const [fields, setFields] = useState({ username: '', password: '' });
+    const { username, password } = fields;
+
+    // Set up message data
+    const [messages, setMessages] = useState({ errorMessage: '', successMessage: ''});
+    const { errorMessage, successMessage } = messages;
+
+    // Handle message update
+    function handleMessage(messageType, value) {
+        setMessages({...messages, [messageType] : value });
+    }
+    
+    // Handle input change
+    function handleChange(e) {
+        const { target } = e;
+        const { name, value } = target;
+        setFields({...fields, [name]: value });
+    }
+
+    // Submit handler form
+    function handleSubmit(e) {
+        e.preventDefault();
+        // Send user data to the validation route.
+        const userData = { username, password };
+        axios.post('/api/users/validate', userData)
+            .then(({ data }) => {
+                if (data.valid) {
+                    handleMessage('successMessage', 'Logged in! Loading profile...');
+                    setRenderView('home');
+                } else {
+                    // User is either not found or invalid.
+                    console.log('hi')
+                    handleMessage('errorMessage', 'Please double check your credentials.');
+                }
+            })
+            .catch(err => console.log(err));
+    }
+
+
     return (
         <Container>
             <h3>Sign In</h3>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Label htmlFor="username">Username/Email</Label>
-                <Input type="text" name="username" />
+                <Input type="text" name="username" value={username} onChange={handleChange} />
 
                 <Label htmlFor="password">Password</Label>
-                <Input type="password" name="password" />
+                <Input type="password" name="password" value={password} onChange={handleChange} />
 
-                <SignUpButton>Sign In</SignUpButton>
+                <SignUpButton type="submit">Sign In</SignUpButton>
                 <HasAccountButton>Recover Account</HasAccountButton>
+                
+                { successMessage === '' ? null : <SuccessMessage>{successMessage}</SuccessMessage> }
+                { errorMessage === '' ? null : <ErrorMessage>{errorMessage}</ErrorMessage> }
             </Form>
         </Container>
     );

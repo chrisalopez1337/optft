@@ -49,6 +49,9 @@ module.exports = {
             const { username, password } = req.body;
             // First fetch the users info
             const userData = await models.getUser({ username });
+            if (!userData?.hashed_pwd) {
+                res.status(200).send({ valid: false });
+            }
             // Check if hash matches the inputted password
             const result = await bcrypt.compare(password, userData.hashed_pwd);
             let response;
