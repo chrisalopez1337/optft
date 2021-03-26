@@ -22,7 +22,7 @@ export default function App() {
     const [summoner, setSummoner] = useState(null);
 
     // Store current render view
-    const [renderView, setRenderView] = useState('log-in');
+    const [renderView, setRenderView] = useState('home');
 
 
     // Summoner handler
@@ -42,6 +42,7 @@ export default function App() {
                 const Analyze = new DataAnalysis(data);
                 const parsed = Analyze.getOverallAverage();
                 setSearchedData(parsed);
+                setRenderView('info-page');
             })
             .catch(console.log);
     }
@@ -59,7 +60,7 @@ export default function App() {
 
     return (
         <Container>
-            <Header search={searchAllInfo} />
+            <Header search={searchAllInfo} setRenderView={setRenderView} />
             {pageRender}
         </Container>
     );

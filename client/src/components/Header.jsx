@@ -23,14 +23,19 @@ const Container = styled.div`
 const Logo = styled.h2`
     margin-left: 7px;
     color: #e64545;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    &:hover {
+        color: whitesmoke;
+    }
 `;
 
-export default function Header({ search }) {
+export default function Header({ search, setRenderView }) {
     return (
         <Container>
-            <Logo>optft.gg</Logo>
+            <Logo onClick={() => setRenderView('home')}>optft.gg</Logo>
             <HeaderSearchBar search={search} />
-            <HeaderButtons />
+            <HeaderButtons setRenderView={setRenderView}/>
         </Container>
     );
 }

@@ -16,6 +16,7 @@ const Container = styled.div`
 
 const Button = styled.button`
     border: 2px solid #e64545;
+    cursor: pointer;
     margin-right: 5px;
     margin-left: 5px;
     font-family: inherit;
@@ -32,11 +33,11 @@ const Button = styled.button`
     }
 `;
 
-export default function HeaderButtons() {
+export default function HeaderButtons({ setRenderView }) {
     return (
         <Container>
-            <Button>Sign Up</Button>
-            <Button>Log In</Button>
+            <Button onClick={() => setRenderView('sign-up')}>Sign Up</Button>
+            <Button onClick={() => setRenderView('log-in')}>Log In</Button>
         </Container>
     );
 }
