@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 // Routers
 const dataRoutes = require('./dataRoutes.js');
+const userRoutes = require('./userRoutes.js');
 
 // Middleware
 app.use(bodyParser.json());
@@ -15,5 +16,6 @@ app.use('/', express.static(path.join(__dirname, '../client/dist')));
 
 // Routing
 app.use('/api/data', dataRoutes);
+app.use('/api/users', userRoutes);
 
 app.listen(PORT, () => console.log(`App listening @ localhost:${PORT}`));
