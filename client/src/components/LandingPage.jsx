@@ -3,7 +3,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 // Children components
 import LandingSearch from './LandingSearch.jsx';
-import LandingPageSignUp from './LandingPageSignUp.jsx';
 
 import image from '../../dist/assets/background.jpg';
 
