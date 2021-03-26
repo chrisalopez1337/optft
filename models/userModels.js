@@ -8,5 +8,14 @@ module.exports = {
         } catch(err) {
             throw new Error(err);
         }
+    },
+
+    getUser: async (query) => {
+        try {
+            const data = await Users.find(query);
+            return data;
+        } catch(err) {
+            throw new Error(err);
+        }
     }
 }
