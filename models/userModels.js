@@ -13,7 +13,7 @@ module.exports = {
     getUser: async (query) => {
         try {
             const data = await Users.find(query);
-            return data;
+            return data[0];
         } catch(err) {
             throw new Error(err);
         }

@@ -39,7 +39,28 @@ module.exports = {
             const data = await models.getUser(query);
             res.status(201).send(data);
         } catch(err) {
+            console.log(err);
             res.sendStatus(500);
         }
     },
+
+    validateUser: async (req, res) => {
+        try {
+            const { username, password } = req.body;
+            // First fetch the users info
+            const userData = await models.getUser({ username });
+            // Check if hash matches the inputted password
+            const result = await bcrypt.compare(password, userData.hashed_pwd);
+            let response;
+            if (result) {
+                response = { valid: true, userData };
+            } else {
+                response = { valid: false };
+            }
+            res.status(200).send(response);
+        } catch(err) {
+            console.log(err);
+            res.sendStatus(500);
+        }
+    }
 }
