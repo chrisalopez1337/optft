@@ -23,11 +23,18 @@ const Container = styled.div`
 export default function InfoPageRecommended({ data }) {
     const { overallDifference } = data;
     const Handler = new RecommendHandler(overallDifference);
+    const agroInfo = Handler.generateAgroArray();
     return (
         <Container>
             <h2>Our Recommendations</h2>
+            <h3>Gold Limit</h3>
             <ul>
                 <li>{Handler.generateGoldString()}</li>
+            </ul>
+
+            <h3>Durability</h3>
+            <ul>
+                { agroInfo.map(text => <li>{text}</li>)}
             </ul>
         </Container>
     );

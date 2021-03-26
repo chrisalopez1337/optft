@@ -8,6 +8,7 @@ import DataAnalysis from '../utils/dataHandler.js';
 import Header from './Header.jsx';
 import LandingPage from './LandingPage.jsx';
 import InfoPage from './InfoPage.jsx';
+import SignUp from './SignUp.jsx';
 
 // Styling
 const Container = styled.div`
@@ -18,6 +19,10 @@ const Container = styled.div`
 export default function App() {
     // Store general data
     const [summoner, setSummoner] = useState(null);
+
+    // Store current render view
+    const [renderView, setRenderView] = useState('sign-up');
+
 
     // Summoner handler
     function parseSummoner(data) {
@@ -40,10 +45,14 @@ export default function App() {
             .catch(console.log);
     }
 
-    // Conditional rendering for landing page vs Info Page 
-    const pageRender = searchedData
-        ? (<InfoPage data={searchedData} summoner={summoner}/>)
-        : (<LandingPage search={searchAllInfo} />)
+    // Conditional rendering
+    const pageRender = renderView === 'home'
+        ? <LandingPage search={searchAllInfo} setRenderView={setRenderView}/>
+        : renderView === 'info-page'
+        ? <InfoPage data={searchedData} summoner={summoner} setRenderView={setRenderView}/>
+        : renderView === 'sign-up'
+        ? <SignUp setRenderView={setRenderView} />
+        : <></>
 
     return (
         <Container>
