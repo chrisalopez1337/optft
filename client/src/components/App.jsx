@@ -9,6 +9,7 @@ import Header from './Header.jsx';
 import LandingPage from './LandingPage.jsx';
 import InfoPage from './InfoPage.jsx';
 import SignUp from './SignUp.jsx';
+import LogIn from './LogIn.jsx';
 
 // Styling
 const Container = styled.div`
@@ -21,7 +22,7 @@ export default function App() {
     const [summoner, setSummoner] = useState(null);
 
     // Store current render view
-    const [renderView, setRenderView] = useState('sign-up');
+    const [renderView, setRenderView] = useState('log-in');
 
 
     // Summoner handler
@@ -52,6 +53,8 @@ export default function App() {
         ? <InfoPage data={searchedData} summoner={summoner} setRenderView={setRenderView}/>
         : renderView === 'sign-up'
         ? <SignUp setRenderView={setRenderView} />
+        : renderView === 'log-in'
+        ? <LogIn setRenderView={setRenderView} />
         : <></>
 
     return (
