@@ -1,6 +1,9 @@
+// Mailer setup
 const { SendGridApiKey } = require('../config');
 const sgMail = require('@sendgrid/mail')
-
+// DB Model
+const { Users } = require('../database');
+// Model function, for testing
 const main = async (req, res) => {
     try {
         sgMail.setApiKey(SendGridApiKey);
@@ -18,5 +21,23 @@ const main = async (req, res) => {
     }
 }
 
-main();
-module.exports = { main };
+// Utility functions
+const generateHash = (length = 100) => {
+    let result = '';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+module.exports = {
+    handlePasswordResetEmail: async (req, res) => {
+        try {
+            // First we need to store a token in the DB to allow the user to recover account.
+        } catch(err) {
+
+        }
+    }
+}
