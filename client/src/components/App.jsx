@@ -11,6 +11,7 @@ import LandingPage from './LandingPage.jsx';
 import InfoPage from './InfoPage.jsx';
 import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
+import Recover from './Recover.jsx';
 
 // Styling
 const Container = styled.div`
@@ -102,6 +103,8 @@ export default function App() {
         ? <SignUp setRenderView={setRenderView} />
         : renderView === 'log-in'
         ? <LogIn setRenderView={setRenderView} logIn={logIn}/>
+        : renderView === 'recover'
+        ? <Recover setRenderView={setRenderView} />
         : <></>
 
     return (

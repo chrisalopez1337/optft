@@ -151,7 +151,10 @@ export default function LogIn({ setRenderView, logIn }) {
                 <Input type="password" name="password" value={password} onChange={handleChange} />
 
                 <SignUpButton type="submit">Sign In</SignUpButton>
-                <HasAccountButton>Recover Account</HasAccountButton>
+                <HasAccountButton onClick={function(e) {
+                    e.preventDefault();
+                    setRenderView('recover');
+                }}>Recover Account</HasAccountButton>
                 
                 { successMessage === '' ? null : <SuccessMessage>{successMessage}</SuccessMessage> }
                 { errorMessage === '' ? null : <ErrorMessage>{errorMessage}</ErrorMessage> }
