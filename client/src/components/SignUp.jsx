@@ -86,7 +86,7 @@ const SignUpButton = styled.button`
 
 
 
-export default function SignUp() {
+export default function SignUp({ setRenderView }) {
     
        // Store form data;
     const [fields, setFields] = useState({ username: '', password: '', verifyPassword: '', email: '' });
@@ -252,7 +252,10 @@ export default function SignUp() {
                 { verifyPasswordMessage === '' ? null : <p>{verifyPasswordMessage}</p>}
 
                 <SignUpButton type="subimt">Create Account</SignUpButton>
-                <HasAccountButton>Already Signed Up?</HasAccountButton>
+                <HasAccountButton onClick={function(e) {
+                    e.preventDefault();
+                    setRenderView('log-in');
+                }}>Already Signed Up?</HasAccountButton>
                 
                 { submitMessage === '' ? null : <p>{submitMessage}</p>}
             </Form>
