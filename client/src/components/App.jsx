@@ -27,7 +27,7 @@ export default function App() {
     const [summoner, setSummoner] = useState(null);
 
     // Store current render view
-    const [renderView, setRenderView] = useState('home');
+    const [renderView, setRenderView] = useState('recover');
 
 
     // Summoner handler
