@@ -51,7 +51,7 @@ export default function Recover({ setRenderView }) {
         <Container>
             <InnerWrapper>
                 <h1>Recover</h1>
-                <RecoverDiv>
+                <RecoverDiv onClick={() => setRenderView('recover-password')}>
                     <h2> Forgot Password </h2>
                 </RecoverDiv>
 

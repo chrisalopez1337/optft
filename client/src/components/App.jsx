@@ -12,6 +12,7 @@ import InfoPage from './InfoPage.jsx';
 import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
 import Recover from './Recover.jsx';
+import RecoveryPasswordReset from './RecoveryPasswordReset.jsx';
 
 // Styling
 const Container = styled.div`
@@ -105,6 +106,8 @@ export default function App() {
         ? <LogIn setRenderView={setRenderView} logIn={logIn}/>
         : renderView === 'recover'
         ? <Recover setRenderView={setRenderView} />
+        : renderView === 'recover-password'
+        ? <RecoveryPasswordReset setRenderView={setRenderView} />
         : <></>
 
     return (
