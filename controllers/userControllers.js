@@ -33,8 +33,8 @@ module.exports = {
             const { searchItem } = req.params;
             // Check if its a username or email
             const query = isEmail(searchItem)
-                ? { email: searchItem }
-                : { username: searchItem };
+                ? { email: searchItem.toLowerCase() }
+                : { username: searchItem.toLowerCase() };
             // Retrieve data
             const data = await models.getUser(query);
             res.status(201).send(data);
@@ -48,7 +48,7 @@ module.exports = {
         try {
             const { username, password } = req.body;
             // First fetch the users info
-            const userData = await models.getUser({ username });
+            const userData = await models.getUser({ username: username.toLowerrCase() });
             // This is kind of a messy way to exit early, may refactor front end to first make sure the account even exists.
             if (!userData?.hashed_pwd) {
                 res.status(200).send({ valid: false });
