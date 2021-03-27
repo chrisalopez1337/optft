@@ -19,7 +19,7 @@ module.exports = {
             const { username, email, password } = req.body;
             // First hash the password
             const hashed_pwd = await bcrypt.hash(password, saltRounds);
-            const userData = { username, email, hashed_pwd };
+            const userData = { username: username.toLowerCase(), email: email.toLowerCase(), hashed_pwd };
             await models.createUser(userData);
             res.sendStatus(201);
         } catch(err) {
@@ -49,6 +49,7 @@ module.exports = {
             const { username, password } = req.body;
             // First fetch the users info
             const userData = await models.getUser({ username });
+            // This is kind of a messy way to exit early, may refactor front end to first make sure the account even exists.
             if (!userData?.hashed_pwd) {
                 res.status(200).send({ valid: false });
             }

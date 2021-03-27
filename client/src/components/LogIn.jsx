@@ -98,7 +98,7 @@ const SignUpButton = styled.button`
     }
 `;
 
-export default function LogIn({ setRenderView }) {
+export default function LogIn({ setRenderView, logIn }) {
 
     // Set up form data
     const [fields, setFields] = useState({ username: '', password: '' });
@@ -129,10 +129,10 @@ export default function LogIn({ setRenderView }) {
             .then(({ data }) => {
                 if (data.valid) {
                     handleMessage('successMessage', 'Logged in! Loading profile...');
+                    logIn(data.userData);
                     setRenderView('home');
                 } else {
                     // User is either not found or invalid.
-                    console.log('hi')
                     handleMessage('errorMessage', 'Please double check your credentials.');
                 }
             })

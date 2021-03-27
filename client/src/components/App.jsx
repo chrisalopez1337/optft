@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { setOne, getOne, setOneWithTTL, getOneWithTTL, pruneExpired, deleteOne } from 'local-js';
 // Utility functions
 import DataAnalysis from '../utils/dataHandler.js';
 // Children components
@@ -18,6 +19,9 @@ const Container = styled.div`
 `;
 
 export default function App() {
+    // Store logged in user data
+    const [userData, setUserData] = useState(null);
+
     // Store general data
     const [summoner, setSummoner] = useState(null);
 
@@ -30,6 +34,48 @@ export default function App() {
         const { summonerName } = data; // Will parse our more later
         const summoner = { summonerName };
         setSummoner(summoner);
+    }
+
+    // Mount user on load
+    useEffect(() => {
+        const username = getOne('user');
+        if (username) {
+            setUserData(getUser(username.username));
+            console.log(userData);
+        }
+    }, [])
+
+    // Get user function
+    function getUser(searchItem) {
+        axios.get(`/api/users/${searchItem}`)
+            .then(res => {
+                if (res.data?.username) {
+                    return res.data
+                } else {
+                    return false;
+                }
+            })
+            .catch(console.log);
+    }
+
+    // Log in handler
+    function logIn(userData) {
+        persistUser(userData.username);
+        setUserData(userData);
+    }
+
+    // Persist user
+    function persistUser(username) {
+        const data = { username };
+        const key = 'user';
+        const ttl = 604800; 
+        setOneWithTTL(key, data, ttl);
+    }
+    // Log out handler
+    function logOut() {
+        const key = 'user';
+        deleteOne(key);
+        setUserData(null);
     }
 
     // Store searched data
@@ -55,7 +101,7 @@ export default function App() {
         : renderView === 'sign-up'
         ? <SignUp setRenderView={setRenderView} />
         : renderView === 'log-in'
-        ? <LogIn setRenderView={setRenderView} />
+        ? <LogIn setRenderView={setRenderView} logIn={logIn}/>
         : <></>
 
     return (
