@@ -48,7 +48,7 @@ module.exports = {
         try {
             const { username, password } = req.body;
             // First fetch the users info
-            const userData = await models.getUser({ username: username.toLowerrCase() });
+            const userData = await models.getUser({ username: username.toLowerCase() });
             // This is kind of a messy way to exit early, may refactor front end to first make sure the account even exists.
             if (!userData?.hashed_pwd) {
                 res.status(200).send({ valid: false });
@@ -66,5 +66,5 @@ module.exports = {
             console.log(err);
             res.sendStatus(500);
         }
-    }
+    },
 }

@@ -3,6 +3,9 @@ const { SendGridApiKey } = require('../config');
 const sgMail = require('@sendgrid/mail')
 // DB Model
 const { Users } = require('../database');
+// Hashing
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // Mailing Handler
 const sendEmail = async (to, subject, html) => {
@@ -143,7 +146,10 @@ module.exports = {
             const query = isEmail(searchItem)
                 ? { email: searchItem.toLowerCase() }
                 : { username: searchItem.toLowerCase() };
-            const update = { password: newPassword };
+
+            // Hash the password
+            const hashed_pwd = await bcrypt.hash(newPassword, saltRounds);
+            const update = { hashed_pwd };
 
             await Users.findOneAndUpdate(query, update);
             const response = { updated: true, message: 'Password changed, please log in.' };
