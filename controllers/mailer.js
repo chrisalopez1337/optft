@@ -50,7 +50,6 @@ const getUser = async (searchItem) => {
         const query = isEmail(searchItem)
             ? { email: searchItem.toLowerCase() }
             : { username: searchItem.toLowerCase() };
-        console.log(searchItem, query)
 
         let user = await Users.find(query);
         if (user[0]) {
@@ -78,7 +77,7 @@ const updatePasswordHash = async (searchItem, oldTokens) => {
     }
 }
 
-// Server side functions
+// These are all currently in one file, I think I can move some of these functions elseware
 module.exports = {
     handlePasswordReset: async (req, res) => {
         try {
@@ -97,21 +96,10 @@ module.exports = {
             const email = user.email;
             const subject = `OPTFT | Reset Password for: ${user.username}`;
             const html = `
-                <style>
-                    .container {
-                        display: flex;
-                        align-items: flex;
-                        justify-content: center;
-                        flex-direction: column;
-                    }
-                    
-                    .token {
-                        color: blue;
-                    }
-                </style>
-                <div class="container">
+                <div>
                     <h4>Recovery</h4>
-                    <p>Use this token to recover your account: <span class="token">${hash}</span>
+                    <p">Use this token to recover your account:</p>
+                    <p style="color: blue;">${hash}</p>
                 </div>
             `;
             const sent = await sendEmail(email, subject, html);
@@ -125,6 +113,43 @@ module.exports = {
             }
         } catch(err) {
             console.error(err);
+            res.sendStatus(500);
+        }
+    },
+
+    verifyPasswordHash: async (req, res) => {
+        try {
+            const { hash, searchItem } = req.body;
+            const user = await getUser(searchItem);
+            // Compare stored hash with one presented
+            if (hash === user.verify.passwordHash) {
+                // Hash's match, allow user to update
+                const response = { match: true, message: 'Verified, please choose a new password' };
+                res.status(201).send(response);
+            } else {
+                const reponse = { match: false, message: 'Please make sure the token is correct' };
+                res.status(201).send(response);
+            }
+        } catch(err) {
+            console.log(err);
+            res.sendStatus(500);
+        }
+    },
+
+    updatePassword: async (req, res) => {
+        try {
+            const { searchItem, newPassword } = req.body;
+            const query = isEmail(searchItem)
+                ? { email: searchItem.toLowerCase() }
+                : { username: searchItem.toLowerCase() };
+            const update = { password: newPassword };
+
+            await Users.findOneAndUpdate(query, update);
+            const response = { updated: true, message: 'Password changed, please log in.' };
+            res.status(201).send(response);
+        } catch(err) {
+            console.log(err);
+            res.sendStatus(500);
         }
     }
 }
