@@ -112,13 +112,11 @@ export default function RecoveryPasswordReset({ setRenderView }) {
 
     // Submit handler for user entering the token
     function handleTokenRequest(e) {
-        console.log('Hi')
         e.preventDefault();
         axios.post('/api/users/recovery/verify-hash', { hash, searchItem })
             .then(({ data }) => {
                 // update server response
                 setServerResponse(data);
-                console.log(data);
                 // If it was verified continue the user
                 if (data.match) {
                     setCurrentForm('newPassword');
@@ -129,6 +127,16 @@ export default function RecoveryPasswordReset({ setRenderView }) {
 
     function handlePasswordUpdate(e) {
         e.preventDefault();
+        axios.post('/api/users/recovery/change-password', { searchItem, newPassword })
+            .then(({ data }) => {
+                console.log(data)
+                // update server response
+                setServerResponse(data);
+                if (data.updated) {
+                    setCurrentForm('complete');
+                }
+            })
+            .catch(console.log)
     }
 
     // JSX Items
