@@ -66,13 +66,20 @@ const Button = styled.button`
     }
 `;
 
+const Col = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+`;
+
 export default function RecoveryPasswordReset({ setRenderView }) {
     // Set current form they are on
     const [currentForm, setCurrentForm] = useState('enter');
 
     // Field Storage
     const [fields, setFields] = useState({ searchItem: '', hash: '', newPassword: '' });
-    const { searchItem, hash, newPassword } = req.body;
+    const { searchItem, hash, newPassword } = fields;
     // Field handler
     function handleField(e) {
         const { target } = e; 
@@ -82,16 +89,52 @@ export default function RecoveryPasswordReset({ setRenderView }) {
 
     // Storage for response messaging and if the item worked or not
     const [serverResponse, setServerResponse] = useState({ updated: null, message: null });
+    const { updated, message } = serverResponse;
 
     // Submit handler for the user requesting an email
     function handleEmailRequest(e) {
+        e.preventDefault();
+        if (searchItem === '') {
+            setServerResponse({ updated: false, message: 'Please enter a username or email'});
+        }
+        // Attempt to update the users token and send the email
+        axios.post('/api/users/recover/send-password-recovery', { searchItem })
+            .then(({ data }) => {
+                // update the server response
+                setServerResponse(data);
+                // If it was updated, move them to the next form
+                if (data.updated) {
+                    setCurrentForm('hash');
+                }
+            })
+            .catch(console.log);
+    }
+
+    // Submit handler for user entering the token
+    function handleTokenRequest(e) {
+        console.log('Hi')
+        e.preventDefault();
+        axios.post('/api/users/recovery/verify-hash', { hash, searchItem })
+            .then(({ data }) => {
+                // update server response
+                setServerResponse(data);
+                console.log(data);
+                // If it was verified continue the user
+                if (data.match) {
+                    setCurrentForm('newPassword');
+                }
+            })
+            .catch(console.log);
+    }
+
+    function handlePasswordUpdate(e) {
         e.preventDefault();
     }
 
     // JSX Items
     const EnterFormJSX = 
         (
-            <Form>
+            <Form onSubmit={handleEmailRequest}>
                 <Label htmlFor="searchItem">Username/Email</Label>
                 <Input name="searchItem" type="text" value={searchItem} onChange={handleField} />
                 
@@ -101,22 +144,47 @@ export default function RecoveryPasswordReset({ setRenderView }) {
 
     const EnterTokenJSX = 
         (
-            <Form>
-                <Label htmlFor="searchItem">Enter Token</Label>
-                <Input name="searchItem" type="text" />
+            <Form onSubmit={handleTokenRequest}>
+                <Label htmlFor="hash">Enter Token</Label>
+                <Input name="hash" type="text" value={hash} onChange={handleField} />
                 
-                <Button type="submit">Send recovery token</Button>
+                <Button type="submit">Verify Token</Button>
             </Form>
+        );
+
+    const newPasswordJSX = 
+        (
+            <Form onSubmit={handlePasswordUpdate}>
+                <Label htmlFor="newPassword">Enter New Password</Label>
+                <Input name="newPassword" type="password" value={newPassword} onChange={handleField} />
+                
+                <Button type="submit">Update Password</Button>
+            </Form>
+        );
+
+    const completeJSX = 
+        (
+            <Col>
+                <h1>{message}</h1>
+                <Button onClick={() => setRenderView('log-in')}>Log In</Button>
+            </Col>
         );
 
     // Conditional JSX rending
     const moduleRender = currentForm === 'enter'
         ? EnterFormJSX 
+        : currentForm === 'hash'
+        ? EnterTokenJSX
+        : currentForm === 'newPassword'
+        ? newPasswordJSX
+        : currentForm === 'complete'
+        ? completeJSX
         : <></>;
     return (
         <Container>
             <h2>Reset Password</h2>
             { moduleRender }
+            <p>{ message === '' ? null : message !== '' && currentForm !== 'complete' ? message : null }</p>
         </Container>
     );
 }

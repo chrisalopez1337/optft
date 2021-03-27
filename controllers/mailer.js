@@ -105,7 +105,7 @@ module.exports = {
             const sent = await sendEmail(email, subject, html);
             if (sent) {
                 // Email was properly sent
-                const goodSend = { updated: true, message: 'Recovery email sent, when you recieve the email click the button below.'};
+                const goodSend = { updated: true, message: 'Recovery email sent, when you recieve the email enter the token above.'};
                 res.status(201).send(goodSend);
             } else {
                 res.status(400).send(badSend);
@@ -121,8 +121,9 @@ module.exports = {
         try {
             const { hash, searchItem } = req.body;
             const user = await getUser(searchItem);
+            console.log(user);
             // Compare stored hash with one presented
-            if (hash === user.verify.passwordHash) {
+            if (hash === user.recovery.passwordHash) {
                 // Hash's match, allow user to update
                 const response = { match: true, message: 'Verified, please choose a new password' };
                 res.status(201).send(response);
