@@ -17,7 +17,7 @@ const sendEmail = async (to, subject, html) => {
         await sgMail.send(message);
         return true;
     } catch(err) {
-        throw new Error(err);
+        console.error(err);
     }
 }
 
@@ -25,9 +25,9 @@ const sendEmail = async (to, subject, html) => {
 const generateHash = (length = 100) => {
     let result = '';
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const charLength = characters.length;
+    const charLength = chars.length;
     for (let i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += chars.charAt(Math.floor(Math.random() * charLength));
     }
     return result;
 }
@@ -50,6 +50,7 @@ const getUser = async (searchItem) => {
         const query = isEmail(searchItem)
             ? { email: searchItem.toLowerCase() }
             : { username: searchItem.toLowerCase() };
+        console.log(searchItem, query)
 
         let user = await Users.find(query);
         if (user[0]) {
@@ -73,7 +74,7 @@ const updatePasswordHash = async (searchItem, oldTokens) => {
         const doc = await Users.findOneAndUpdate(query, update);
         return hash;
     } catch(err) {
-        throw new Error(err);
+        console.error(err);
     }
 }
 
@@ -122,10 +123,8 @@ module.exports = {
                 res.status(400).send(badSend);
                 return;
             }
-            
-
         } catch(err) {
-
+            console.error(err);
         }
     }
 }
