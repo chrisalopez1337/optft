@@ -1,4 +1,9 @@
+# General notes
+For account recovery I should use localStorage to persist the step they are on incase they were to refresh the page. (pre-password entry atleast)
+
+
 # Notes for the data processing script
+
 
 # Eventually I want the ability for when you click on a single game, it fetches all the other playes in the lobbys averages over 20 games and then we could not only store that for faster load times potentially, but also to give more accurate averages.
 

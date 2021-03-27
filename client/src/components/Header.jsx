@@ -21,11 +21,12 @@ const Container = styled.div`
 `;
 
 const Logo = styled.h2`
-    margin-left: 7px;
+    margin-left: 15px;
     color: #e64545;
     cursor: pointer;
     transition-duration: 0.2s;
     &:hover {
+        margin-left: 0px;
         color: whitesmoke;
     }
 `;

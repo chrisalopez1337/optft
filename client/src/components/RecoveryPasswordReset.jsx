@@ -73,6 +73,7 @@ const Col = styled.div`
     flex-direction: column; 
 `;
 
+
 export default function RecoveryPasswordReset({ setRenderView }) {
     // Set current form they are on
     const [currentForm, setCurrentForm] = useState('enter');
@@ -86,6 +87,23 @@ export default function RecoveryPasswordReset({ setRenderView }) {
         const { name, value } = target;
         setFields({...fields, [name]: value});
     }
+
+    // Password messaging
+    const [pwdMessage, setPwdMessage] = useState('');
+
+    // Form validation for password
+    useEffect(() => {
+        if (newPassword === '') {
+            setPwdMessage('');
+        } else {
+            const regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+            if (regex.test(newPassword)) {
+                setPwdMessage('');
+            } else {
+                setPwdMessage('Password must be eight or more characters, contain atleast one uppercase, one symbol, and one lowercase.');
+            }
+        }
+    }, [newPassword]);
 
     // Storage for response messaging and if the item worked or not
     const [serverResponse, setServerResponse] = useState({ updated: null, message: null });
@@ -167,6 +185,7 @@ export default function RecoveryPasswordReset({ setRenderView }) {
                 <Input name="newPassword" type="password" value={newPassword} onChange={handleField} />
                 
                 <Button type="submit">Update Password</Button>
+                { pwdMessage === '' ? null : <p>{pwdMessage}</p> }
             </Form>
         );
 
