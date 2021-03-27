@@ -82,16 +82,46 @@ module.exports = {
     handlePasswordReset: async (req, res) => {
         try {
             const { searchItem } = req.body;
+            const badSend = { updated: false, message: 'User does not exist' };
             // Make sure the user exists
             const user = await getUser(searchItem);
             if (!user) {
                 // Account does not exist
-                return { updated: false, message: 'User does not exist' };
+                res.status(400).send(badSend);
+                return;
             }
             // Update password in DB and retrieve the hash
             const hash = await updatePasswordHash(searchItem, user.recovery);
             // Format email
             const email = user.email;
+            const subject = `OPTFT | Reset Password for: ${user.username}`;
+            const html = `
+                <style>
+                    .container {
+                        display: flex;
+                        align-items: flex;
+                        justify-content: center;
+                        flex-direction: column;
+                    }
+                    
+                    .token {
+                        color: blue;
+                    }
+                </style>
+                <div class="container">
+                    <h4>Recovery</h4>
+                    <p>Use this token to recover your account: <span class="token">${hash}</span>
+                </div>
+            `;
+            const sent = await sendEmail(email, subject, html);
+            if (sent) {
+                // Email was properly sent
+                const goodSend = { updated: true, message: 'Recovery email sent, when you recieve the email click the button below.'};
+                res.status(201).send(goodSend);
+            } else {
+                res.status(400).send(badSend);
+                return;
+            }
             
 
         } catch(err) {
