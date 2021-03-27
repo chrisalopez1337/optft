@@ -1,32 +1,22 @@
-const nodemailer = require('nodemailer');
+const { SendGridApiKey } = require('../config');
+const sgMail = require('@sendgrid/mail')
 
 const main = async (req, res) => {
-    let testAccount = await nodemailer.createTestAccount();
-
-    let transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false,
-        auth: {
-            user: testAccount.user,
-            pass: testAccount.pass,
-        },
-    });
-
-    let info = await transporter.sendMail({
-        from: '"Fred Foo" <foo@exmaple.com>',
-        to: "chrisnote1337@gmail.com",
-        subject: "dev",
-        text: "Hello",
-        html: "<h1>This is HTML</h1>"
-    });
-
-    console.log("Message sent: %s", info.messageId);
-    console.log("Preview URL: %s",
-    nodemailer.getTestMessageUrl(info));
+    try {
+        sgMail.setApiKey(SendGridApiKey);
+        const message = {
+            to: 'chrisnote1337@gmail.com',
+            from: 'sakura.lopez.dev@gmail.com',
+            subject: 'Testing',
+            text: 'Test',
+            html: '<h1>Hello</h1>',
+        }
+        await sgMail.send(message);
+        console.log('Email sent');
+    } catch(err) {
+        throw new Error(err);
+    }
 }
 
-main().catch(console.error);
 main();
-
-module.exports = main;
+module.exports = { main };
