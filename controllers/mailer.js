@@ -98,9 +98,9 @@ const updatePasswordHash = async (searchItem, oldTokens) => {
 
 // These are all currently in one file, I think I can move some of these functions elseware
 module.exports = {
-    handlePasswordReset: async (req, res) => {
+    sendRecoveryEmail: async (req, res) => {
         try {
-            const { searchItem } = req.body;
+            const { searchItem, hashType } = req.body;
             const badSend = { updated: false, message: 'User does not exist' };
             // Make sure the user exists
             const user = await getUser(searchItem);
@@ -110,10 +110,10 @@ module.exports = {
                 return;
             }
             // Update password in DB and retrieve the hash
-            const hash = await updateHash(searchItem, user.recovery, 'passwordHash');
+            const hash = await updateHash(searchItem, user.recovery, hashType);
             // Format email
             const email = user.email;
-            const subject = `OPTFT | Reset Password for: ${user.username}`;
+            const subject = `OPTFT | Reset Token for: ${user.username}`;
             const html = `
                 <div>
                     <h4>Recovery</h4>
@@ -174,6 +174,4 @@ module.exports = {
             res.sendStatus(500);
         }
     },
-
-
 }

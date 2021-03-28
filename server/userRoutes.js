@@ -7,7 +7,7 @@ userRouter.post('/create', controllers.createUser);
 userRouter.get('/:searchItem', controllers.getUser);
 userRouter.post('/validate', controllers.validateUser);
 // These are for recovery
-userRouter.post('/recover/send-password-recovery', mailController.handlePasswordReset);
+userRouter.post('/recovery/send-recovery-email', mailController.sendRecoveryEmail);
 userRouter.post('/recovery/verify-hash', mailController.verifyHash);
 userRouter.post('/recovery/change-password', mailController.updatePassword);
 

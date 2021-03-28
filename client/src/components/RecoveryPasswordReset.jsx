@@ -116,7 +116,7 @@ export default function RecoveryPasswordReset({ setRenderView }) {
             setServerResponse({ updated: false, message: 'Please enter a username or email'});
         }
         // Attempt to update the users token and send the email
-        axios.post('/api/users/recover/send-password-recovery', { searchItem })
+        axios.post('/api/users/recover/send-recovery-email', { searchItem, hashType: 'passwordHash' })
             .then(({ data }) => {
                 // update the server response
                 setServerResponse(data);
