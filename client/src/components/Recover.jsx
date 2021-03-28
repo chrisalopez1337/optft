@@ -66,3 +66,5 @@ export default function Recover({ setRenderView }) {
         </Container>
     );
 }
+
+// We want this component to sent an Auth token to an email, and then if the token matchs return the users username.

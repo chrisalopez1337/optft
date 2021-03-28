@@ -65,6 +65,21 @@ const getUser = async (searchItem) => {
     }
 }
 
+// New modular hash handler
+const updateHash = async (searchItem, oldTokens, hashToChange) => {
+    try {
+        const hash = generateHash();
+        const query = isEmail(searchItem)
+            ? { email: searchItem.toLowerCase() }
+            : { username: searchItem.toLowerCase() }
+        const update = { recovery: {...oldTokens, [hashToChange]: hash } };
+        await Users.findOneAndUpdate(query, update);
+        return hash;
+    } catch(err) {
+        console.error(err);
+    }
+}
+
 // PasswordHash handler
 const updatePasswordHash = async (searchItem, oldTokens) => {
     try {
@@ -80,6 +95,7 @@ const updatePasswordHash = async (searchItem, oldTokens) => {
     }
 }
 
+
 // These are all currently in one file, I think I can move some of these functions elseware
 module.exports = {
     handlePasswordReset: async (req, res) => {
@@ -94,7 +110,7 @@ module.exports = {
                 return;
             }
             // Update password in DB and retrieve the hash
-            const hash = await updatePasswordHash(searchItem, user.recovery);
+            const hash = await updateHash(searchItem, user.recovery, 'passwordHash');
             // Format email
             const email = user.email;
             const subject = `OPTFT | Reset Password for: ${user.username}`;
