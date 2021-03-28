@@ -52,18 +52,69 @@ const InfoWrapper = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #1c1c1c;
-    height: 250px;
     width: 600px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-bottom: 20px;
 `;
 
 const Row = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: flex-row;
 `;
 
+const PlayerInfoContainer = styled.div`
+    border: 0.5px solid #0f75db;
+    box-shadow: 0px 0px 15px #0f75db;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 250px;
+    background-color: #4f4b4b;
+    margin-right: 5px;
+`;
+
+const PeerInfoContainer = styled.div`
+    border: 0.5px solid #db940f;
+    box-shadow: 0px 0px 15px #db940f;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 250px;
+    background-color: #4f4b4b;
+    margin-left: 5px;
+`;
+
+const ItemTitle = styled.h4`
+    margin-left: 10px;
+`;
+
+const TitleHolderLeft = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 250px;
+    margin-right: 5px;
+`;
+
+const TitleHolderRight = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 250px;
+    margin-left: 5px;
+`;
+const BlueTitle = styled.h4`
+    color: #0f75db;
+`;
+
+const GoldTitle = styled.h4`
+    color: #db940f;
+`;
 
 export default function SummonerCard({ search, summoner, data }) {
     const [summonerIconId, setSummonerIconId] = useState('');
@@ -83,6 +134,25 @@ export default function SummonerCard({ search, summoner, data }) {
                 </PortraitWrapper>
 
                 <InfoWrapper>
+                    <Row>
+                            <TitleHolderLeft>
+                                <BlueTitle>Your Average</BlueTitle>
+                            </TitleHolderLeft>
+
+                            <TitleHolderRight>
+                                <GoldTitle>Peers Average</GoldTitle>
+                            </TitleHolderRight>
+                    </Row>
+
+                    <Row>
+                        <PlayerInfoContainer>
+                            <ItemTitle>Gold Left:</ItemTitle>
+                        </PlayerInfoContainer>
+                        
+                        <PeerInfoContainer>
+                            <ItemTitle>Gold Left:</ItemTitle>
+                        </PeerInfoContainer>
+                    </Row>
                 </InfoWrapper>
             </Wrapper>
         </Container>
