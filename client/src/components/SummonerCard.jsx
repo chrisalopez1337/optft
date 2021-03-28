@@ -21,7 +21,8 @@ const Wrapper = styled.div`
     justify-content: flex-start;
     flex-direction: row;
     width: 800px;
-    height: 275px;
+    min-height: 275px;
+
 `;
 
 const PortraitWrapper = styled.div`
@@ -65,7 +66,7 @@ const Row = styled.div`
 
 const PlayerInfoContainer = styled.div`
     border: 0.5px solid #0f75db;
-    box-shadow: 0px 0px 15px #0f75db;
+    box-shadow: 0px 0px 5px #0f75db;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -73,11 +74,12 @@ const PlayerInfoContainer = styled.div`
     width: 250px;
     background-color: #4f4b4b;
     margin-right: 5px;
+    margin-bottom: 10px;
 `;
 
 const PeerInfoContainer = styled.div`
     border: 0.5px solid #db940f;
-    box-shadow: 0px 0px 15px #db940f;
+    box-shadow: 0px 0px 5px #db940f;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -85,6 +87,7 @@ const PeerInfoContainer = styled.div`
     width: 250px;
     background-color: #4f4b4b;
     margin-left: 5px;
+    margin-bottom: 10px;
 `;
 
 const ItemTitle = styled.h4`
@@ -117,6 +120,8 @@ const GoldTitle = styled.h4`
 `;
 
 export default function SummonerCard({ search, summoner, data }) {
+    console.log(data);
+    // Summoner Image parser
     const [summonerIconId, setSummonerIconId] = useState('');
     useEffect(() => {
         if (summoner) {
@@ -125,6 +130,16 @@ export default function SummonerCard({ search, summoner, data }) {
             setSummonerIconId(src);
         }
     }, [summoner]);
+
+    // Parsing summonerData
+    const [playerAverages, setPlayerAverages] = useState({ 
+        damageToPlayers: '', 
+        goldLeft: '', 
+        lastRound: '', 
+        level: '', 
+        playerTraits: null, 
+        playersEliminated: '', 
+        timeEliminated: ''});
     return (
         <Container>
             <Wrapper>
@@ -146,11 +161,61 @@ export default function SummonerCard({ search, summoner, data }) {
 
                     <Row>
                         <PlayerInfoContainer>
-                            <ItemTitle>Gold Left:</ItemTitle>
+                            <ItemTitle>Gold Left: {playerAverages.goldLeft}</ItemTitle>
                         </PlayerInfoContainer>
                         
                         <PeerInfoContainer>
                             <ItemTitle>Gold Left:</ItemTitle>
+                        </PeerInfoContainer>
+                    </Row>
+
+                    <Row>
+                        <PlayerInfoContainer>
+                            <ItemTitle>Damage To Players: {playerAverages.damageToPlayers}</ItemTitle>
+                        </PlayerInfoContainer>
+                        
+                        <PeerInfoContainer>
+                            <ItemTitle>Damage To Players:</ItemTitle>
+                        </PeerInfoContainer>
+                    </Row>
+
+                    <Row>
+                        <PlayerInfoContainer>
+                            <ItemTitle>Round Eliminated: {playerAverages.lastRound}</ItemTitle>
+                        </PlayerInfoContainer>
+                        
+                        <PeerInfoContainer>
+                            <ItemTitle>Round Eliminated:</ItemTitle>
+                        </PeerInfoContainer>
+                    </Row>
+
+                    <Row>
+                        <PlayerInfoContainer>
+                            <ItemTitle>Level: {playerAverages.level}</ItemTitle>
+                        </PlayerInfoContainer>
+                        
+                        <PeerInfoContainer>
+                            <ItemTitle>Level:</ItemTitle>
+                        </PeerInfoContainer>
+                    </Row>
+
+                    <Row>
+                        <PlayerInfoContainer>
+                            <ItemTitle>Players Eliminated: {playerAverages.playersEliminated}</ItemTitle>
+                        </PlayerInfoContainer>
+                        
+                        <PeerInfoContainer>
+                            <ItemTitle>Players Eliminated:</ItemTitle>
+                        </PeerInfoContainer>
+                    </Row>
+
+                    <Row>
+                        <PlayerInfoContainer>
+                            <ItemTitle>Time Eliminated: {playerAverages.timeEliminated}</ItemTitle>
+                        </PlayerInfoContainer>
+                        
+                        <PeerInfoContainer>
+                            <ItemTitle>Time Eliminated:</ItemTitle>
                         </PeerInfoContainer>
                     </Row>
                 </InfoWrapper>
