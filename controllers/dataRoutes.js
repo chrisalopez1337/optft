@@ -2,7 +2,7 @@ const TftQuery = require('tft-query');
 // Global client settings
 const useRedis = true;
 const redisConfig = false;
-const apiKey = require('../config');
+const { TFTapiKey } = require('../config');
 
 module.exports = {
     getAllDataBySummonerName: async (req, res) => {
@@ -11,7 +11,7 @@ module.exports = {
             // Data for client
             const payload = { summonerName };
             const region = 'NA'; // This will be dynamic later. 
-            const config = { region, payload, apiKey, useRedis, redisConfig };
+            const config = { region, payload, apiKey: TFTapiKey, useRedis, redisConfig };
             // Create client with information
             const client = new TftQuery(config);
             const response = await client.getAllInfoBySummonerName();

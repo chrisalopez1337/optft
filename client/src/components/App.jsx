@@ -9,6 +9,8 @@ import DataAnalysis from '../utils/dataHandler.js';
 import Header from './Header.jsx';
 import LandingPage from './LandingPage.jsx';
 import InfoPage from './InfoPage.jsx';
+// Potential new layout
+import DataOverview from './DataOverview.jsx';
 import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
 import Recover from './Recover.jsx';
@@ -29,14 +31,12 @@ export default function App() {
     const [summoner, setSummoner] = useState(null);
 
     // Store current render view
-    const [renderView, setRenderView] = useState('home');
+    const [renderView, setRenderView] = useState('info-page');
 
 
     // Summoner handler
     function parseSummoner(data) {
-        const { summonerName } = data; // Will parse our more later
-        const summoner = { summonerName };
-        setSummoner(summoner);
+        setSummoner(data);
     }
 
     // Mount user on load
@@ -100,7 +100,7 @@ export default function App() {
     const pageRender = renderView === 'home'
         ? <LandingPage search={searchAllInfo} setRenderView={setRenderView}/>
         : renderView === 'info-page'
-        ? <InfoPage data={searchedData} summoner={summoner} setRenderView={setRenderView}/>
+        ? <DataOverview search={searchAllInfo} data={searchedData} summoner={summoner} setRenderView={setRenderView}/>
         : renderView === 'sign-up'
         ? <SignUp setRenderView={setRenderView} />
         : renderView === 'log-in'
