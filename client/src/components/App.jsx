@@ -13,6 +13,7 @@ import SignUp from './SignUp.jsx';
 import LogIn from './LogIn.jsx';
 import Recover from './Recover.jsx';
 import RecoveryPasswordReset from './RecoveryPasswordReset.jsx';
+import RecoveryUsername from './RecoveryUsername.jsx'; 
 
 // Styling
 const Container = styled.div`
@@ -108,6 +109,8 @@ export default function App() {
         ? <Recover setRenderView={setRenderView} />
         : renderView === 'recover-password'
         ? <RecoveryPasswordReset setRenderView={setRenderView} />
+        : renderView === 'recover-username'
+        ? <RecoveryUsername setRenderView={setRenderView} />
         : <></>
 
     return (

@@ -59,7 +59,7 @@ export default function Recover({ setRenderView }) {
                     <h2> Forgot Email </h2>
                 </RecoverDiv>
 
-                <RecoverDiv>
+                <RecoverDiv onClick={() => setRenderView('recover-username')}>
                     <h2> Forgot Username </h2>
                 </RecoverDiv>
             </InnerWrapper>
