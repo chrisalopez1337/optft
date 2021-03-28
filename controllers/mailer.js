@@ -136,13 +136,12 @@ module.exports = {
         }
     },
 
-    verifyPasswordHash: async (req, res) => {
+    verifyHash: async (req, res) => {
         try {
-            const { hash, searchItem } = req.body;
+            const { hash, searchItem, hashType } = req.body;
             const user = await getUser(searchItem);
-            console.log(user);
             // Compare stored hash with one presented
-            if (hash === user.recovery.passwordHash) {
+            if (hash === user.recovery[hashType]) {
                 // Hash's match, allow user to update
                 const response = { match: true, message: 'Verified, please choose a new password' };
                 res.status(201).send(response);
@@ -174,5 +173,7 @@ module.exports = {
             console.log(err);
             res.sendStatus(500);
         }
-    }
+    },
+
+
 }

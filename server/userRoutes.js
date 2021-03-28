@@ -8,7 +8,7 @@ userRouter.get('/:searchItem', controllers.getUser);
 userRouter.post('/validate', controllers.validateUser);
 // These are for recovery
 userRouter.post('/recover/send-password-recovery', mailController.handlePasswordReset);
-userRouter.post('/recovery/verify-hash', mailController.verifyPasswordHash);
+userRouter.post('/recovery/verify-hash', mailController.verifyHash);
 userRouter.post('/recovery/change-password', mailController.updatePassword);
 
 module.exports = userRouter;

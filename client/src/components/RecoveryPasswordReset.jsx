@@ -131,7 +131,7 @@ export default function RecoveryPasswordReset({ setRenderView }) {
     // Submit handler for user entering the token
     function handleTokenRequest(e) {
         e.preventDefault();
-        axios.post('/api/users/recovery/verify-hash', { hash, searchItem })
+        axios.post('/api/users/recovery/verify-hash', { hash, searchItem, hashType: 'passwordHash' })
             .then(({ data }) => {
                 // update server response
                 setServerResponse(data);
