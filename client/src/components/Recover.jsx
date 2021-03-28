@@ -54,11 +54,11 @@ export default function Recover({ setRenderView }) {
                 <RecoverDiv onClick={() => setRenderView('recover-password')}>
                     <h2> Forgot Password </h2>
                 </RecoverDiv>
-
+                {/* Eventually want this here incase a user doesnt have access too their email or needs to change it. Could potentially do something with mobile here in the future
                 <RecoverDiv>
                     <h2> Forgot Email </h2>
                 </RecoverDiv>
-
+                    */}
                 <RecoverDiv onClick={() => setRenderView('recover-username')}>
                     <h2> Forgot Username </h2>
                 </RecoverDiv>

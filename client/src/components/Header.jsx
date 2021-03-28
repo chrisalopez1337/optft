@@ -26,7 +26,6 @@ const Logo = styled.h2`
     cursor: pointer;
     transition-duration: 0.2s;
     &:hover {
-        margin-left: 0px;
         color: whitesmoke;
     }
 `;
